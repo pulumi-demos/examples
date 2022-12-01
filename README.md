@@ -26,17 +26,4 @@ Column Descriptions:
 * MS => Multistack: Example uses stack references.
 * UT => Unit Testing: Example demonstrates unit testing.
 
-#### csharp/unit-testing
-Can be used to discuss unit-testing best practices around two use-cases:
-* component-resource unit-testing: You want to be able to ensure updates to a component resource does not violate its requirements (as enforced by unit tests).
-* stack unit-testing: You want to ensure a stack is not creating resources with bad settings. 
-
-### Multilanguage Packages Stories
-Examples that show the use of multilanguage packages.
-### csharp/aws-cs-eks-guestbook
-* Multi-stack deployment of a base k8s cluster and an app on the cluster.
-* Uses golang-based `multilanguage-packages/pulumi-k8s-servicedeployment` multilanguage component to deploy a simple app to K8s.
-
-### Stack References Stories
-Examples that show stack references.
 

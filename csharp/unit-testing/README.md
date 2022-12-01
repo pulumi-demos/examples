@@ -1,4 +1,9 @@
 # C# Unit Testing Best Practices
+Can be used to discuss unit-testing best practices around two use-cases:
+* component-resource unit-testing: You want to be able to ensure updates to a component resource does not violate its requirements (as enforced by unit tests).
+* stack unit-testing: You want to ensure a stack is not creating resources with bad settings. 
+
+## Main Talking Points
 The main goals for this example are:
 * Show a way to test component resources.
   * In this case the idea is to make sure the component resource, itself, abides by some requirements 
