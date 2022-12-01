@@ -1,0 +1,11 @@
+name: guestbook-base-eks-infra-py
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Deploys base EKS infrastructure
+template:
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: us-east-2
