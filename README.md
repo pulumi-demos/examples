@@ -14,7 +14,7 @@ Each referenced folder includes a README with more details around the use-case a
 
 Path to Example         | Sec | CRs | MLCs | UT | Notes
 :---------------------- |:--- |:--- |:---- |:-- |:------
-csharp/unit-testing     |     |     |      | :heavy_check_mark: | Both component resource unit-testing as well as stack unit-testing best practices.
+`csharp/unit-testing`     |     |     |      | :heavy_check_mark: | Both component resource unit-testing as well as stack unit-testing best practices.
 
 Column Descriptions:
 * Path to Example: Relative path to the examples main project code in this repo.
