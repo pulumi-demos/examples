@@ -9,11 +9,32 @@ This repo, [Pulumi-Demos examples](https://github.com/pulumi-demos/pulumi-deploy
 See and comment here: https://docs.google.com/document/d/1CWVYzXoC4Uy0cZhe7sVpKChqQyauMQrBT00xHlbknu0/edit 
 
 ## Use-Cases and Narratives
-This section contains links to examples for specific use-cases or stories.  
+A quick reference of which stories can be told with with examples.
 Each referenced folder includes a README with more details around the use-case and related narrative.
 
-### Unit-Testing
+Story Column Descriptions:
+* Sec => Secrets: Example provides a good use-case to show setting and use of input and/or output secrets.
+* CRs => Component Resources (CRs): Example uses same-language component resources.
+* MLCs => Multilanguage Components: Example uses multilanguage component resources.
+* UT => Unit Testing: Example demonstrates unit testing.
+
+Path to Example         | Sec | CRs | MLCs | UT
+:---------------------- |:--- |:--- |:---- |:---
+csharp/unit-testing     |     |     |      | :heavy_chark_mark: 
+
+### Unit-Testing Stories
+Examples that can be used to dig into topics around unit-testing.
 #### csharp/unit-testing
 Can be used to discuss unit-testing best practices around two use-cases:
 * component-resource unit-testing: You want to be able to ensure updates to a component resource does not violate its requirements (as enforced by unit tests).
 * stack unit-testing: You want to ensure a stack is not creating resources with bad settings. 
+
+### Multilanguage Packages Stories
+Examples that show the use of multilanguage packages.
+### csharp/aws-cs-eks-guestbook
+* Multi-stack deployment of a base k8s cluster and an app on the cluster.
+* Uses golang-based `multilanguage-packages/pulumi-k8s-servicedeployment` multilanguage component to deploy a simple app to K8s.
+
+### Stack References Stories
+Examples that show stack references.
+

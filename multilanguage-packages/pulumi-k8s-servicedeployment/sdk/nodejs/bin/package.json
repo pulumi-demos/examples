@@ -1,0 +1,19 @@
+{
+    "name": "@pulumi/k8s-servicedeployment",
+    "version": "0.0.6",
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@pulumi/kubernetes": "^3.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^3.7.0"
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    },
+    "pulumi": {
+        "resource": true
+    }
+}

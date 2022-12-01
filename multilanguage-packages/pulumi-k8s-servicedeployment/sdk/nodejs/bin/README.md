@@ -1,0 +1,77 @@
+# K8s Service Deployment Pulumi Component Provider (Go)
+
+This repo contains the component resource and generated SDKs for a Pulumi package that can be used to deploy K8s Deployments and Services onto a cluster.
+
+## How Was This Created?
+This repo was created using the boilerplate here: https://github.com/pulumi/pulumi-component-provider-go-boilerplate
+
+The component resource that this repo is based on is the ServiceDeployment.go component resource found here: https://github.com/pulumi/examples/blob/master/kubernetes-go-guestbook/components/serviceDeployment.go 
+
+# Steps of Note to Create the Package and SDKs
+* The boilerplate has various places of `github.com/pulumi/pulumi-xyz` the middle `pulumi` repo name should be changed to your own repo or something unique.
+  * In this case, it was changed to `demos`.
+* The `package` line in the component resource (i.e. `provider.pkg.provider.ServiceDeployment.go` in this case) should be set to `provider` instead of `main`.
+* The input args and outputs declared in the base component resource (i.e. `provider/pkg/provider/ServiceDeployment.go`) need to have \`pulumi:"*lowercaseName*"\`
+  * These *lowercaseName* forms need to match the inputs and outputs specified in `schema.yaml`
+  * See `ServiceDeployment.go` for examples.
+* In the `schema.yaml` file be sure to update the `namespaces` section in `csharp` languages block:
+  * **language** section:
+    * *csharp*
+      * map the hyphenated naming to a camel-case name since csharp doesn't like hyphens in namespaces as in:
+      ```
+          namespaces:
+            aws-quickstart-vpc: AwsQuickStartVpc
+      ```
+## Build and Test
+If the provider `schema.yaml` has changed, update `Makefile` and `version/version.go` with a new version number to ensure the changes are picked up by the calling code.
+
+```bash
+# Build the bits
+make build
+
+# Install the SDKs
+make install
+
+# The rest of these steps are up to you and should be unnecessary but kept for information purposes
+# Build and install the provider (plugin copied to $GOPATH/bin)
+make install_provider
+
+make generate # Or make gen_dotnet_sdk
+make build # Or make build_dotnet_sdk
+
+# NOTE You can go straignt to install since it'll do gen and build. 
+# Also, you can do make install_dotnet_sdk or make install_nodejs_sdk, etc to do just the specific package 
+make install 
+```
+
+# Test C#
+To use the generated C# package do the following, note the package directory i.e. where you ran the `make` commands above.
+- You should have run `make install` or `make install_dotnet_sdk` in the package directory as described above.
+- We'll refer to this directory as PKG_DIR in the following steps
+- Open a terminal in the Pulumi project folder and do the following
+  - export PATH=$PATH:*PKG_DIR/bin*
+    - e.g. `export PATH=$PATH:~/my-package-dir/bin`
+  - export NUGET_DIR=*PKG_DIR/nuget*
+    - e.g. `export NUGET_DIR=~/my-package-dir/nuget`
+  - Run
+    ```
+    dotnet add package --source "$NUGET_DIR;https://api.nuget.org/v3/index.json"  Pulumi.K8sServiceDeployment
+    ```
+- In your Pulumi project file add: 
+  ```
+  using Pulumi.K8sServiceDeployment
+  ```
+- Run `pulumi up`
+
+
+# Test Node.js SDK
+Not fully vetted, basically do the same steps as the C# list above but switch to yarn, etc instead of dotnet add.  
+```bash
+$ make install_nodejs_sdk
+$ cd examples/simple
+$ yarn install
+$ yarn link @pulumi/xyz
+$ pulumi stack init test
+$ pulumi config set aws:region us-east-1
+$ pulumi up
+```
