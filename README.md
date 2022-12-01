@@ -20,7 +20,7 @@ Story Column Descriptions:
 
 Path to Example         | Sec | CRs | MLCs | UT
 :---------------------- |:--- |:--- |:---- |:---
-csharp/unit-testing     |     |     |      | :heavy_chark_mark: 
+csharp/unit-testing     |     |     |      | :heavy_check_mark: 
 
 ### Unit-Testing Stories
 Examples that can be used to dig into topics around unit-testing.
