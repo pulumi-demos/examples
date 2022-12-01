@@ -1,0 +1,4 @@
+config:
+  aws-py-wordpress-fargate-rds:db_password:
+    secure: AAABAOR4IiqFMTMjY0VFNwiNx4K4pOtsQ4xWRYcOHZ1qnQpBP8qqXJq3zPc=
+  aws:region: us-east-1

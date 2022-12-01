@@ -5,17 +5,18 @@ The examples in that repo are generally pretty simple and are generally meant to
 
 This repo, [Pulumi-Demos examples](https://github.com/pulumi-demos/pulumi-deployments), is part of a github org used by the pre and post sales teams. The intent of this repo is to reflect larger scale and more involved use-cases and examples to demonstrate key Pulumi concepts and constructs.
 
-## (Proposed) Requirements
+## (Proposed) Requirements - THIS SECTION TO BE REMOVED WHEN REPO GOES PUBLIC
 See and comment here: https://docs.google.com/document/d/1CWVYzXoC4Uy0cZhe7sVpKChqQyauMQrBT00xHlbknu0/edit 
 
 ## Use-Cases and Narratives
-A quick reference of which stories can be told with with examples.
+A quick reference of which stories can be told with which examples.
 Each referenced folder includes a README with more details around the use-case and related narrative.
 
 Path to Example         | Sec | CRs | MLCs | MS | UT | Notes
 :---------------------- |:--- |:--- |:---- |:-- |:-- |:------
 csharp/unit-testing     |     |     |      |    |:heavy_check_mark:| Both component resource unit-testing as well as stack unit-testing best practices.
 csharp/aws-cs-eks-guestbook |:heavy_check_mark:| |:heavy_check_mark:|:heavy_check_mark:| | Programmatic secrets to encrypt kubeconfig; Uses golang-based MLC.
+python/aws-py-wordpress-fargate-rds |:heavy_check_mark:|:heavy_check_mark:||||Optional secret config for DB password; Components used for all parts of the project.
 
 
 Column Descriptions:
