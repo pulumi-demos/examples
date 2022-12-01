@@ -5,6 +5,7 @@ This demo highlights the following:
 - C# support: It is written in C#.
 - Multilanguage Packages: It uses a C# package generated from a Golang provider.
 - Multistack Architecture: Deploys base EKS cluster infrastructure and the layers on a "Guestbook" application using multiple services deployed using the `K8sServiceDeployment` package.
+- Uses programmatic secrets to encrypt the kubeconfig output.
 
 # Demo Steps
 ## Prelaunch EKS Cluster

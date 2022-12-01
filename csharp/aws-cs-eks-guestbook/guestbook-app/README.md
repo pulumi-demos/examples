@@ -16,7 +16,7 @@ See the `eks-base-infra` folder for instructions on how to launch the EKS stack 
 The `guestbook-app` uses the C# `pulumi_k8s_servicedeployment` package sdk generated in the multilanguage-packages folder. Therefore you need to set up your environment to be able to use it. The SDK is automatically installed via the `nuget.config` and `.csproj` files.
 However the plugin needs to be installed for the SDK to work.
 
-- Find the `demos/multilanguage-packages/pulumi-k8s-servicedeployment/bin` directory
+- Find the `multilanguage-packages/pulumi-k8s-servicedeployment/bin` directory
   - Look at the gzip tarballs in there and note the path to the one for your machine.
   - If you don't see a tarball for your machine, see the `gen_provider_plugin` target in `Makefile` for the package.
 - run `dotnet list package` to see the version of the `pulumi-k8s-servicedeployment` sdk and note the VERSION

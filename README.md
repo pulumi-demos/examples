@@ -12,15 +12,18 @@ See and comment here: https://docs.google.com/document/d/1CWVYzXoC4Uy0cZhe7sVpKC
 A quick reference of which stories can be told with with examples.
 Each referenced folder includes a README with more details around the use-case and related narrative.
 
-Path to Example         | Sec | CRs | MLCs | UT | Notes
-:---------------------- |:--- |:--- |:---- |:-- |:------
-`csharp/unit-testing`     |     |     |      | :heavy_check_mark: | Both component resource unit-testing as well as stack unit-testing best practices.
+Path to Example         | Sec | CRs | MLCs | MS | UT | Notes
+:---------------------- |:--- |:--- |:---- |:-- |:-- |:------
+csharp/unit-testing     |     |     |      |    |:heavy_check_mark:| Both component resource unit-testing as well as stack unit-testing best practices.
+csharp/aws-cs-eks-guestbook |:heavy_check_mark:| |:heavy_check_mark:|:heavy_check_mark:| | Programmatic secrets to encrypt kubeconfig; Uses golang-based MLC.
+
 
 Column Descriptions:
 * Path to Example: Relative path to the examples main project code in this repo.
 * Sec => Secrets: Example provides a good use-case to show setting and use of input and/or output secrets.
 * CRs => Component Resources (CRs): Example uses same-language component resources.
 * MLCs => Multilanguage Components: Example uses multilanguage component resources.
+* MS => Multistack: Example uses stack references.
 * UT => Unit Testing: Example demonstrates unit testing.
 
 #### csharp/unit-testing
