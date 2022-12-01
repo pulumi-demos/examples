@@ -7,3 +7,13 @@ This repo, [Pulumi-Demos examples](https://github.com/pulumi-demos/pulumi-deploy
 
 ## (Proposed) Requirements
 See and comment here: https://docs.google.com/document/d/1CWVYzXoC4Uy0cZhe7sVpKChqQyauMQrBT00xHlbknu0/edit 
+
+## Use-Cases and Narratives
+This section contains links to examples for specific use-cases or stories.  
+Each referenced folder includes a README with more details around the use-case and related narrative.
+
+### Unit-Testing
+#### csharp/unit-testing
+Can be used to discuss unit-testing best practices around two use-cases:
+* component-resource unit-testing: You want to be able to ensure updates to a component resource does not violate its requirements (as enforced by unit tests).
+* stack unit-testing: You want to ensure a stack is not creating resources with bad settings. 
