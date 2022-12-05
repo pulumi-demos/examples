@@ -8,6 +8,15 @@ This demo highlights the following:
 - Uses programmatic secrets to encrypt the kubeconfig output.
 
 # Demo Steps
+## Install Multilanguage Plugin
+This demo requires the `K8sServiceDeployment` SDK and related plugin found in the multilanguage-packages folder.
+
+* Install the MLC plugin:
+  ```bash
+  pulumi plugin install resource k8s-servicedeployment v0.0.3 -f PACKAGE_TARBALL_PATH
+  ```
+  * `PACKAGE_TARBALL_PATH` will be the path to the applicable tgz file found in `multilanguage-packages/pulumi-k8s-servicedeployment/bin/`
+  
 ## Prelaunch EKS Cluster
 It takes a solid 10-15 minutes for EKS cluster to launch and so you should launch the EKS cluster stack ahead of the demo.
 
