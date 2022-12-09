@@ -1,42 +1,34 @@
 import os
-import subprocess
 import json
+import yaml
 
-def prep_workspace(project_dir: str, language: str):
-  print('project_dir: ', project_dir)
-  if language == "python":
-    prep_python_workspace(project_dir, language)
-  else:
-    print('No prep action taken for language: ', language)
+def get_project_info(project_dir: str):
+  with open(f'{project_dir}/Pulumi.yaml') as f:
+    project_config = yaml.safe_load(f)
+  project_info = {}
+  project_info["project_name"] = project_config["name"]
+  project_info["language"] = project_config["runtime"]
+  project_info["project_dir"] = project_dir
+  return(project_info)
 
-def prep_python_workspace(project_dir: str, language: str):
-  print("preparing virtual environment...")
-  subprocess.run(["python3", "-m", "venv", "venv"], check=True, cwd=project_dir, capture_output=True)
-  subprocess.run([os.path.join("venv", "bin", "python3"), "-m", "pip", "install", "--upgrade", "pip"],
-              check=True, cwd=project_dir, capture_output=True)
-  subprocess.run([os.path.join("venv", "bin", "pip"), "install", "-r", "requirements.txt"],
-              check=True, cwd=project_dir, capture_output=True)
-  print("virtual environment is ready!")
+# def get_subfolders(base_dir: str):
+#   subfolders = [ f.path for f in os.scandir(base_dir) if f.is_dir() ]
+#   return(subfolders)
 
+# def get_projects():
+#   base_dir = get_project_base_dir()
+#   # Get all directories under base_dir
+#   subfolders = get_subfolders(base_dir)
+#   # Identify project folders by the existence of the Pulumi.yaml file
+#   projects = []
+#   for folder in subfolders:
+#     if (os.path.isfile(folder+"/Pulumi.yaml")):
+#       folder_name = os.path.basename(folder)
+#       projects.append((folder_name, folder_name))
+#   return(projects)
 
-def get_subfolders(base_dir: str):
-  subfolders = [ f.path for f in os.scandir(base_dir) if f.is_dir() ]
-  return(subfolders)
-
-def get_projects():
-  base_dir = get_project_base_dir()
-  # Get all directories under base_dir
-  subfolders = get_subfolders(base_dir)
-  # Identify project folders by the existence of the Pulumi.yaml file
-  projects = []
-  for folder in subfolders:
-    if (os.path.isfile(folder+"/Pulumi.yaml")):
-      folder_name = os.path.basename(folder)
-      projects.append((folder_name, folder_name))
-  return(projects)
-
-def get_project_base_dir():
-  return(os.path.join(os.path.dirname(__file__), "..", "projects")) 
+# def get_project_base_dir():
+#   return(os.path.join(os.path.dirname(__file__), "..", "projects")) 
 
 # Returns list of deployment options for display in self-service form.
 # Current Format: [(deployment_option_name, deployment_option_name)]

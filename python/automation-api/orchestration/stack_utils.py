@@ -1,41 +1,28 @@
 from pulumi import automation as auto
-from pulumi_orch.automate.project_utils import get_deployment_options_array, get_deployment_language, get_deployment_projects, prep_workspace, get_project_base_dir
-from flask import jsonify
-import sys
 import json
-import os
 
-def update_stack(org: str, deployment_option: str, env: str, destroy: bool):
+def update_stacks(projects, destroy: bool): 
 
-    print("deployment option: ", deployment_option)
-    print("env: ", env)
-
-    # Get the deployment option language for prep step below
-    deployment_language = get_deployment_language(deployment_option)
-    # Get the projects for the requested deployment_option
-    projects = get_deployment_projects(deployment_option)
     if (destroy): # need to destroy the projects in reverse order
         projects = projects[::-1] 
     print("projects to process:", projects)
     stacks_results = []
     for project in projects:
         # Set project_dir for the requested project
-        project_base_dir = get_project_base_dir()
-        project_dir = os.path.join(os.path.dirname(__file__), project_base_dir, project) 
-        print("project_dir", project_dir)
+        name = project["project_name"]
+        dir = project["project_dir"]
+        org = project["org"]
+        stack = project["stack"]
 
-        # Set up the environment for the pulumi project/stack
-        prep_workspace(project_dir, deployment_language)
-
-        stack_name = f"{org}/{project}/{env}"
-        # Create our stack using a local program in the ../aws-py-voting-app directory
-        stack = auto.create_or_select_stack(stack_name=stack_name, work_dir=project_dir)
+        stack_name = f"{org}/{name}/{stack}"
+        stack = auto.create_or_select_stack(stack_name=stack_name, work_dir=dir)
         print("successfully initialized stack")
 
+        ### TO-DO: Make config part of arrangements or assumed to be in hierarchical config ...
         print("setting up config")
+        stack.set_config("aws:region", auto.ConfigValue(value="us-east-2"))
         stack.set_config("azure-native:location", auto.ConfigValue(value="CentralUS"))
         stack.set_config("org", auto.ConfigValue(value=org))
-        stack.set_config("base_stack_project", auto.ConfigValue(value=projects[0]))
         print("config set")
 
         print("refreshing stack")

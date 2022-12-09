@@ -10,13 +10,12 @@ Provides an example of using automation API using Python.
 
 ## Main Components of the Example
 
-* `deployments.yaml`: This file captures the information needed for the orchestration logic. Specifically, it provides information on how to find and run specific stacks including multi-stack use-cases. It is hand-crafted to allow you to demo what you want. 
+* `arrangements.yaml`: This file captures the information needed for the orchestration logic. Specifically, it provides information on how to find and run specific stacks including multi-stack use-cases. It is hand-crafted to allow you to demo what you want. 
 * `orchestration`: This folder contains the orchestration logic used to manage the projects and stacks. It is called by the code in the `run-automation` folder.
-* `run-automation`: This folder contains the command line code that is executed to run the automation logic.
+* `automation.py`: This is the main program that executes the orchestration automation.
 
 ## Running the Example
 
-* Modify the `deployments.json` file as you wish or use it as-is.
-* Navigate to the `run-automation` folder.
-* Run `python ./main.py`
+* Modify the `arrangements.yaml` file as you wish or use it as-is.
+* Run `python ./automation.py`
 
