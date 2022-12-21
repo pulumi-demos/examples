@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/pulumi/pulumi/master/pkg/codegen/schema/pulumi.json
+---
+name: k8s-servicedeployment
+resources:
+  k8s-servicedeployment:index:ServiceDeployment:
+    isComponent: true
+    inputProperties:
+      image:
+        type: string
+        description: Name of the image to deploy.
+      ports:
+        type: array
+        items:
+          type: number
+        description: Ports for service to listen on.
+      replicas:
+        type: number
+        description: Number of replicas of the service to deploy.
+      serviceType:
+        type: string
+        description: Service Type for K8s service. E.g. "LoadBalancer" or "ClusterIP"
+      namespace:
+        type: string
+        description: Namespace in which to push the deployment and service.
+    requiredInputs:
+      - image
+      - ports
+    properties:
+      frontEndIp:
+        type: string
+        description: The front end IP
+    required:
+      - frontEndIp
+language:
+  csharp:
+    packageReferences:
+      Pulumi: 3.*
+      Pulumi.Kubernetes: 3.*
+    namespaces:
+      k8s-servicedeployment: K8sServiceDeployment
+  go:
+    generateResourceContainerTypes: true
+    importBasePath: github.com/demos/pulumi-k8s-servicedeployment/sdk/go/k8s-servicedeployment
+  nodejs:
+    dependencies:
+      "@pulumi/kubernetes": "^3.0.0"
+    devDependencies:
+      typescript: "^3.7.0"
+  python:
+    requires:
+      pulumi: ">=3.0.0,<4.0.0"
+      pulumi-kubernetes: ">=3.0.0,<4.0.0"

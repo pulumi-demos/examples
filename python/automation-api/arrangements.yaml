@@ -1,0 +1,19 @@
+# An "arrangement" represents one or more Pulumi projects to be orchestrated by the automation logic.
+# This file provi des the information needed for the orchestration logic to deploy the project(s).
+# If an arrangement consists of more than one project, then the projects need to be listed in the order they 
+# need to deployed. (Note: the logic will reverse the order for destroy operations.)
+
+# Absolute or relative path to where the projects are located.
+# Relative path must be relative to where the `automation.py` program is run.
+base-folder: ../.. 
+
+# Array of arrangements and the related project folder(s) for each arrangement.
+arrangements:
+- name: AWS Serverless
+  project-folders:
+    - typescript/aws-ts-serverless
+- name: Guestbook 
+  project-folders:
+    - csharp/aws-cs-eks-guestbook/eks-base-infra
+    - csharp/aws-cs-eks-guestbook/guestbook-app
+    - yaml/aws-yaml-eks-guestbook/guestbook-app-yaml

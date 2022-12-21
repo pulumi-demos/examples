@@ -1,0 +1,13 @@
+README.md
+setup.py
+pulumi_k8s_servicedeployment/__init__.py
+pulumi_k8s_servicedeployment/_utilities.py
+pulumi_k8s_servicedeployment/provider.py
+pulumi_k8s_servicedeployment/py.typed
+pulumi_k8s_servicedeployment/service_deployment.py
+pulumi_k8s_servicedeployment.egg-info/PKG-INFO
+pulumi_k8s_servicedeployment.egg-info/SOURCES.txt
+pulumi_k8s_servicedeployment.egg-info/dependency_links.txt
+pulumi_k8s_servicedeployment.egg-info/not-zip-safe
+pulumi_k8s_servicedeployment.egg-info/requires.txt
+pulumi_k8s_servicedeployment.egg-info/top_level.txt

@@ -1,0 +1,26 @@
+.pulumi
+**/bin/
+**/obj/
+**/node_modules/
+vendor/
+**/Pulumi.*.yaml
+**/yarn-error.log
+yarn.lock
+package-lock.json
+.idea/
+**/version.txt
+**/dist
+nuget/
+/pkg
+/pkg/*
+
+ci-scripts/
+# *.tar.gz
+
+/provider/cmd/pulumi-resource-*/schema.go
+
+
+!/bin
+!/nuget
+!/sdk/python/bin
+!/sdk/nodejs/bin
