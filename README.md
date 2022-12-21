@@ -15,7 +15,7 @@ Each referenced folder includes a README with more details around the use-case a
 Path to Example         | Sec | CRs | MLCs | MS | UT | Notes
 :---------------------- |:--- |:--- |:---- |:-- |:-- |:------
 csharp/unit-testing     |     |     |      |    |:heavy_check_mark:| Both component resource unit-testing as well as stack unit-testing best practices.
-python/automation-api   |     |     |      |:heavy_check_mark:| Shows automation API in Python.
+python/automation-api   |     |     |      |:heavy_check_mark:| | Shows automation API in Python.
 csharp/aws-cs-eks-guestbook |:heavy_check_mark:| |:heavy_check_mark:|:heavy_check_mark:| | Programmatic secrets to encrypt kubeconfig; Uses golang-based MLC.
 python/aws-py-eks-guestbook |:heavy_check_mark:| |:heavy_check_mark:|:heavy_check_mark:| | Programmatic secrets to encrypt kubeconfig; Uses golang-based MLC.
 python/aws-py-wordpress-fargate-rds |:heavy_check_mark:|:heavy_check_mark:||||Optional secret config for DB password; Components used for all parts of the project.
