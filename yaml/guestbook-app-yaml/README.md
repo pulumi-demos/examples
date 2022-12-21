@@ -2,18 +2,20 @@
 Deploys Guestbook app and related containers on an EKS cluster deployed via another stack 
 using Pulumi's YAML provider.
 
-# Launch the base infrastructure stack
-See the `python/aws-py-eks-guestbook/eks-base-infra` folder for instructions on how to launch the EKS stack this guestbook project defaults to using.
+# Launch the base K8s infrastructure stack
+This project can deploy on any K8s deployment.  
+However, the setup assumes you will use `python/aws-py-eks-guestbook/eks-base-infra`.  
+That said, `csharp/aws-cs-eks-guestbook/eks-base-infra` also works well.
 
 # Setup
 - `cd guestbook-app-yaml`
-- `pulumi stack init demo/dev` 
 - `pulumi config set aws:region us-east-1`
+- `pulumi stack init demo/dev` 
+  - This stack (e.g. `dev`) needs to match the stack name for the base K8s stack.
 - `pulumi config set org ORGANIZATION`
-  - Where *ORGANIZATION* is the name of the org in which the EKS is launched.
+  - Where *ORGANIZATION* is the name of the org in which the base K8s stack is launched.
 - `pulumi config set eksProject guestbook-base-eks-infra-py`
-  - For fun, you could deploy the C# version of the base EKS infra and reference that instead.
-    - See `csharp/aws-cs-eks-guestbook` demo folder.
+  - Use `guestbook-base-eks-infra-cs` if deploying on the C# example as the base.
 
 # Launch and Use
 ## Prepare the GuestBook Service Project

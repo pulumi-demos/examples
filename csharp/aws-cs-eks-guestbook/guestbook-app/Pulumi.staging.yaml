@@ -1,4 +1,0 @@
-config:
-  aws:region: us-west-2
-  guestbook-app-cs:eksProject: guestbook-base-eks-infra-cs
-  guestbook-app-cs:org: demo
