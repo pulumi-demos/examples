@@ -1,7 +1,14 @@
-
 # Amazon EKS Cluster
 
 This example deploys an EKS Kubernetes cluster inside a AWS VPC with proper NodeGroup and Networking Configured
+
+# Demo Overview
+
+This demo highlights the following:
+- Python support: It is written in Python.
+  - Uses standard Python approach of breaking code out to different files.
+- Uses programmatic secrets to encrypt the kubeconfig output.
+- Can be used in conjunction with one of the guestbook project to demonstrate, among other things, stack references.
 
 ## Deploying the App
 

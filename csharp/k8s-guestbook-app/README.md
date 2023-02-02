@@ -1,8 +1,16 @@
 # Introduction
 Deploys Guestbook app and related containers on an EKS cluster deployed via another stack.
 
+# Demo Overview
+**NOTE** This demo uses the `K8sServiceDeployment` package generated in the multilanguage-packages folder. 
+
+This demo highlights the following:
+- C# support: It is written in C#.
+- Multilanguage Packages: It uses a C# package generated from a multilanguage component written in Golang.
+- Multistack Architecture: Uses stack reference to a k8s base infrastructure stack and layers on a "Guestbook" application using multiple services deployed using the `K8sServiceDeployment` multilanguage package.
+
 # Launch the base infrastructure stack
-See the `eks-base-infra` folder for instructions on how to launch the EKS stack this guestbook project relies on.
+Use one of the "eks-base-infra" projects (e.g. csharp/aws-eks-base-infra, or python/aws-eks-base-infra) for instructions on how to launch the EKS stack this guestbook project relies on.
 
 # Setup
 - `pulumi config set aws:region us-west-2`  

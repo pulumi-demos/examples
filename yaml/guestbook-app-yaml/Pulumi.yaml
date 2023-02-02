@@ -1,4 +1,4 @@
-name: guestbook-app-yaml
+name: k8s-guestbook-app-yaml
 runtime: yaml
 description: A YAML version of the guestbook-app-py project
 configuration: 

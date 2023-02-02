@@ -1,3 +1,0 @@
-name: guestbook-base-eks-infra-cs
-runtime: dotnet
-description: An ASP.NET application to deploy base EKS infrastructure for a guestbook app.
