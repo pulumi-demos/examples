@@ -15,17 +15,18 @@ Each referenced folder includes a README with more details around the use-case a
 Path to Example         | Sec | CRs | MLCs | MS | UT | Notes
 :---------------------- |:--- |:--- |:---- |:-- |:-- |:------
 csharp/unit-testing     |     |     |      |    |:heavy_check_mark:| Both component resource unit-testing as well as stack unit-testing best practices.
-csharp/aws-eks-base-infra |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
-csharp/k8s-guestbook-app | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
+csharp/aws-eks-base-infra-cs |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
+csharp/k8s-guestbook-app-cs | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 multilanguage-packages | | |:heavy_check_mark:| | | Contains multilanguage packages used by other projects.
 python/automation-api   |     |     |      |:heavy_check_mark:| | Shows automation API in Python.
-python/aws-eks-base-infra |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
-python/k8s-guestbook-app | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
+python/aws-eks-base-infra-py |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
+python/k8s-guestbook-app-py | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 python/aws-py-wordpress-fargate-rds |:heavy_check_mark:|:heavy_check_mark:||||Optional secret config for DB password; Components used for all parts of the project.
-typescript/aws-eks-base-infra |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
+typescript/aws-eks-base-infra-ts |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
 typescript/aws-ts-serverless | | | | | | Simplest pulumi program for super quick deployments.
-typescript/gcp-gke-base-infra |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Component resource; Can be used as base K8s for a guestbook stack.
-yaml/aws-yaml-eks-guestbook |:heavy_check_mark:| |:heavy_check_mark:|:heavy_check_mark:| | Programmatic secrets to encrypt kubeconfig; Uses golang-based MLC.
+typescript/gcp-gke-base-infra-ts |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Component resource; Can be used as base K8s for a guestbook stack.
+typescript/k8s-guestbook-app-ts| | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
+yaml/k8s-guestbook-app-yaml | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 
 
 Column Descriptions:
