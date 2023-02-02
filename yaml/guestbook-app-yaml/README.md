@@ -2,10 +2,18 @@
 Deploys Guestbook app and related containers on an EKS cluster deployed via another stack 
 using Pulumi's YAML provider.
 
+# Demo Overview
+**NOTE** This demo uses the `K8sServiceDeployment` package generated in the multilanguage-packages folder. 
+
+This demo highlights the following:
+- YAML support: It is written in YAML.
+- Multilanguage Packages: It uses a package generated from a multilanguage component written in Golang. 
+- Multistack Architecture: Uses stack reference to a k8s base infrastructure stack and layers on a "Guestbook" application using multiple services deployed using the `K8sServiceDeployment` multilanguage package.
+
 # Launch the base K8s infrastructure stack
 This project can deploy on any K8s deployment.  
 However, the setup assumes you will use `python/aws-py-eks-guestbook/eks-base-infra`.  
-That said, `csharp/aws-cs-eks-guestbook/eks-base-infra` also works well.
+That said, any "eks-base-infra" stack can be used.
 
 # Setup
 - `cd guestbook-app-yaml`

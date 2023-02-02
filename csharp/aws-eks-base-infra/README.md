@@ -1,6 +1,13 @@
 # AWS C# EKS Cluster
 This example creates an AWS EKS Cluster 
 
+# Demo Overview
+
+This demo highlights the following:
+- C# support: It is written in C#.
+- Uses programmatic secrets to encrypt the kubeconfig output.
+- Can be used in conjunction with one of the guestbook project to demonstrate, among other things, stack references.
+
 ## Deploying the App
 
  To deploy your infrastructure, follow the below steps.

@@ -1,4 +1,4 @@
-name: guestbook-base-eks-infra-py
+name: aws-eks-base-infra-py
 runtime:
   name: python
   options:

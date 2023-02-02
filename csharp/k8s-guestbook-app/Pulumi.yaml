@@ -1,6 +1,3 @@
-name: guestbook-app-py
-runtime:
-  name: python
-  options:
-    virtualenv: venv
+name: k8s-guestbook-app-cs
+runtime: dotnet
 description: Kubernetes Guestbook example based on https://kubernetes.io/docs/tutorials/stateless-application/guestbook/
