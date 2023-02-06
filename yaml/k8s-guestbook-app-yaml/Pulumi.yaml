@@ -1,11 +1,11 @@
 name: k8s-guestbook-app-yaml
 runtime: yaml
 description: A YAML version of the guestbook-app-py project
-configuration: 
+config: 
   org:
-    type: String
+    type: string
   eksProject:
-    type: String
+    type: string
 variables: 
   kubeconfig: ${baseInfraStack.outputs["kubeconfig"]}
 resources: 
