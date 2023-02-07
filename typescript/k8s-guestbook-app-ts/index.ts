@@ -16,7 +16,8 @@ const eksStackRef = new pulumi.StackReference(eksStackName)
 
 const kubeconfig = eksStackRef.requireOutput("kubeconfig") 
 const k8sProvider = new k8s.Provider('k8s-provider', {
-  kubeconfig: kubeconfig
+  kubeconfig: kubeconfig,
+  deleteUnreachable: true
 })
 
 const guestbookNamespace = new k8s.core.v1.Namespace("guestbook-ts-ns", {}, {provider: k8sProvider})
