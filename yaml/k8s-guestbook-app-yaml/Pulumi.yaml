@@ -19,6 +19,7 @@ resources:
     type: pulumi:providers:kubernetes
     properties:
       kubeconfig: ${kubeconfig}
+      deleteUnreachable: true
   # Create K8s namespace in which to deploy the services
   guestbook-yaml-ns:
     type: kubernetes:core/v1:Namespace

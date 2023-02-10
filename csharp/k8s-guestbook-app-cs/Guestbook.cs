@@ -15,7 +15,7 @@ class Guestbook : Stack
         var eksStackRef = new StackReference(eksStackName);
 
         var kubeConfig = Output.Format($"{eksStackRef.RequireOutput("kubeconfig").Apply(v => v.ToString())}"); 
-        var provider = new K8s.Provider("k8s", new K8s.ProviderArgs { KubeConfig = kubeConfig });
+        var provider = new K8s.Provider("k8s", new K8s.ProviderArgs {KubeConfig = kubeConfig, DeleteUnreachable = true});
         var options = new ComponentResourceOptions { Provider = provider };
 
         var ns = new K8s.Core.V1.Namespace("guestbook-cs-ns", new K8s.Types.Inputs.Core.V1.NamespaceArgs{}, new CustomResourceOptions{Provider=provider});
