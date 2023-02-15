@@ -19,7 +19,7 @@ csharp/aws-eks-base-infra-cs |:heavy_check_mark:| | | | | Programmatic secrets t
 csharp/k8s-guestbook-app-cs | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 multilanguage-packages | | |:heavy_check_mark:| | | Contains multilanguage packages used by other projects.
 python/automation-api   |     |     |      |:heavy_check_mark:| | Shows automation API in Python.
-python/aws-eks-base-infra-py |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
+python/aws-eks-base-infra-py |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
 python/k8s-guestbook-app-py | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 python/aws-py-wordpress-fargate-rds |:heavy_check_mark:|:heavy_check_mark:||||Optional secret config for DB password; Components used for all parts of the project.
 typescript/aws-eks-base-infra-ts |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Config secret for DB password; Component for DB; Can be used as base K8s for a guestbook stack.
