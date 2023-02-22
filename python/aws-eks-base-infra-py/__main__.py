@@ -38,7 +38,7 @@ eks_node_group = eks.NodeGroup(
     cluster_name=eks_cluster.name,
     node_group_name='pulumi-eks-nodegroup',
     node_role_arn=iam.ec2_role.arn,
-    subnet_ids=subnet_ids,
+    subnet_ids=vpc.subnet_ids,
     tags={
         'Name': 'pulumi-cluster-nodeGroup',
     },
