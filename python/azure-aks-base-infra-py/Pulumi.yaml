@@ -1,0 +1,6 @@
+name: azure-aks-base-infra-py
+description: Pulumi base project to deploy AKS base infrastructure
+runtime:
+    name: python
+    options:
+        virtualenv: venv
