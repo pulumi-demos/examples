@@ -66,6 +66,7 @@ class Vpc(ComponentResource):
         # limiting to 2 zones for speed and to meet minimal requirements.
         zone_names = [all_zones.names[0], all_zones.names[1]]
         self.subnets = []
+        self.subnet_ids = []
         subnet_name_base = f'{name}-subnet'
         for zone in zone_names:
             vpc_subnet = ec2.Subnet(f'{subnet_name_base}-{zone}',
@@ -86,6 +87,7 @@ class Vpc(ComponentResource):
                 opts=ResourceOptions(parent=self)
             )
             self.subnets.append(vpc_subnet)
+            self.subnet_ids.append(vpc_subnet.id)
 
         # Security Groups
         rds_sg_name = f'{name}-rds-sg'

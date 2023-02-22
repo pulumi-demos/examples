@@ -1,11 +1,18 @@
-import iam
-import vpc
-import utils
+# Pulumi SDKs
 import pulumi
 from pulumi_aws import eks
 
-## EKS Cluster
+# components
+from aws_network import Vpc, VpcArgs 
 
+# local python modules
+import iam
+import utils
+
+## VPC and related resources
+vpc =Vpc('base-infra-net', VpcArgs()) 
+
+## EKS Cluster
 eks_cluster = eks.Cluster(
     'eks-cluster',
     role_arn=iam.eks_role.arn,
@@ -14,7 +21,7 @@ eks_cluster = eks.Cluster(
     },
     vpc_config=eks.ClusterVpcConfigArgs(
         public_access_cidrs=['0.0.0.0/0'],
-        security_group_ids=[vpc.eks_security_group.id],
+        security_group_ids=[vpc.fe_security_group.id],
         subnet_ids=vpc.subnet_ids,
     ),
 )
