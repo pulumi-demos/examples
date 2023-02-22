@@ -1,10 +1,13 @@
+# Pulumi SDKs
 import pulumi
 from pulumi_aws import eks
 
+# components
+from aws_network import Vpc, VpcArgs 
+
+# local python modules
 import iam
 import utils
-
-import network
 
 # Get stack-specific config
 config = pulumi.Config()
@@ -13,13 +16,10 @@ desired_size = config.get_int("desired_count") or 2
 max_size = config.get_int("max_count") or 2
 min_size = config.get_int("min_count") or 1
 
-network=network.Vpc(f'{service_name}-net', network.VpcArgs())
-subnet_ids=[]
-for subnet in network.subnets:
-    subnet_ids.append(subnet.id)
+## VPC and related resources
+vpc =Vpc(f'{service_name}-net', VpcArgs()) 
 
 ## EKS Cluster
-
 eks_cluster = eks.Cluster(
     f'{service_name}-cluster',
     role_arn=iam.eks_role.arn,
@@ -28,8 +28,8 @@ eks_cluster = eks.Cluster(
     },
     vpc_config=eks.ClusterVpcConfigArgs(
         public_access_cidrs=['0.0.0.0/0'],
-        security_group_ids=[network.fe_security_group.id],
-        subnet_ids=subnet_ids,
+        security_group_ids=[vpc.fe_security_group.id],
+        subnet_ids=vpc.subnet_ids,
     ),
 )
 

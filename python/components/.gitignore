@@ -1,4 +1,5 @@
 *.pyc
 venv/
 __pycache__/
+components.egg-info/
 Pulumi.*.yaml

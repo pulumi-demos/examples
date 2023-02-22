@@ -5,11 +5,14 @@ Deploys:
 - FrontEnd: WordPress in Fargate
 """
 
+# Pulumi SDKs
 import pulumi
 import pulumi_random as random
-import network
-import backend
-import frontend
+
+# Components
+from aws_network import Vpc, VpcArgs 
+from aws_rds_backend import Db, DbArgs
+from aws_ecs_frontend import WebService, WebServiceArgs
 
 # Get config data
 config = pulumi.Config()
@@ -28,13 +31,11 @@ if not db_password:
     db_password=password.result
 
 # Create an AWS VPC and subnets, etc
-network=network.Vpc(f'{service_name}-net', network.VpcArgs())
-subnet_ids=[]
-for subnet in network.subnets:
-    subnet_ids.append(subnet.id)
+network=Vpc(f'{service_name}-net', VpcArgs())
+subnet_ids=network.subnet_ids
 
 # Create a backend DB instance
-be=backend.Db(f'{service_name}-be', backend.DbArgs(
+be=Db(f'{service_name}-be', DbArgs(
     db_name=db_name,
     db_user=db_user,
     db_password=db_password,
@@ -43,7 +44,7 @@ be=backend.Db(f'{service_name}-be', backend.DbArgs(
     security_group_ids=[network.rds_security_group.id]
 ))
 
-fe=frontend.WebService(f'{service_name}-fe', frontend.WebServiceArgs(
+fe=WebService(f'{service_name}-fe', WebServiceArgs(
     db_host=be.db.address,
     db_port='3306',
     db_name=be.db.name,
