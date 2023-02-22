@@ -11,7 +11,6 @@ class AksClusterArgs:
                  rg_name=None,
                  cluster_node_count=None,
                  cluster_node_size=None,
-                 cluster_k8s_version=None,
                  admin_username=None,
                  ssh_public_key=None,
                  ):
@@ -19,7 +18,6 @@ class AksClusterArgs:
         self.rg_name = rg_name 
         self.cluster_node_count = cluster_node_count
         self.cluster_node_size = cluster_node_size
-        self.cluster_k8s_version = cluster_k8s_version
         self.admin_username = admin_username
         self.ssh_public_key = ssh_public_key
 
@@ -37,7 +35,6 @@ class AksCluster(ComponentResource):
         rg_name = args.rg_name
         cluster_node_count = args.cluster_node_count
         cluster_node_size = args.cluster_node_size
-        cluster_k8s_version = args.cluster_k8s_version
         admin_username = args.admin_username
         ssh_public_key = args.ssh_public_key
 
@@ -77,7 +74,6 @@ class AksCluster(ComponentResource):
             }],
             dns_prefix=rg_name,
             enable_rbac=True,
-            # kubernetes_version=cluster_k8s_version,
             linux_profile={
                 'admin_username': admin_username,
                 'ssh': {

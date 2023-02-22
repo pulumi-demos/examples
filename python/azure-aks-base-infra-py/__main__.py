@@ -18,7 +18,6 @@ cluster = AksCluster(base_name, AksClusterArgs(
     rg_name=resource_group.name,
     cluster_node_count=config.node_count,
     cluster_node_size=config.node_size,
-    cluster_k8s_version=config.k8s_version,
     admin_username=config.admin_username,
     ssh_public_key=config.ssh_public_key
 ), opts=ResourceOptions())
