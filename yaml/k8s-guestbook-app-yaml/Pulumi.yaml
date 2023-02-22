@@ -1,11 +1,11 @@
 name: k8s-guestbook-app-yaml
 runtime: yaml
 description: A YAML version of the guestbook-app-py project
-configuration: 
+config: 
   org:
-    type: String
+    type: string
   eksProject:
-    type: String
+    type: string
 variables: 
   kubeconfig: ${baseInfraStack.outputs["kubeconfig"]}
 resources: 
@@ -19,6 +19,7 @@ resources:
     type: pulumi:providers:kubernetes
     properties:
       kubeconfig: ${kubeconfig}
+      deleteUnreachable: true
   # Create K8s namespace in which to deploy the services
   guestbook-yaml-ns:
     type: kubernetes:core/v1:Namespace
