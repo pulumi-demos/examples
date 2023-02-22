@@ -1,2 +1,2 @@
 config:
-  guestbook-app-py:eksProject: guestbook-base-eks-infra-py
+  k8s-guestbook-app-py:eksProject: aws-eks-base-infra-py
