@@ -14,6 +14,8 @@ Path to Example         | Sec | CRs | MLCs | MS | UT | Notes
 csharp/unit-testing     |     |     |      |    |:heavy_check_mark:| Both component resource unit-testing as well as stack unit-testing best practices.
 csharp/aws-eks-base-infra-cs |:heavy_check_mark:| | | | | Programmatic secrets to encrypt kubeconfig; Can be used as base K8s for a guestbook stack.
 csharp/k8s-guestbook-app-cs | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
+go/aws-eks-base-infra-go |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Component for IAM; Can be used as base K8s for a guestbook stack.
+go/k8s-guestbook-app-go | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 multilanguage-packages | | |:heavy_check_mark:| | | Contains multilanguage packages used by other projects.
 python/automation-api   |     |     |      |:heavy_check_mark:| | Shows automation API in Python.
 python/aws-eks-base-infra-py |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Component for VPC; Can be used as base K8s for a guestbook stack.
