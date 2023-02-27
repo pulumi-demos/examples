@@ -1,0 +1,6 @@
+name: k8s-guestbook-app-go
+runtime: go
+description: A Go version of the guestbook-app-py project
+config:
+  eksProject:
+    type: string

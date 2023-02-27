@@ -1,0 +1,3 @@
+name: aws-eks-base-infra-go
+runtime: go
+description: AWS EKS deployment
