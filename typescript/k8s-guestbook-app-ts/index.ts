@@ -9,12 +9,12 @@ const currentStack = pulumi.getStack()
 const project = pulumi.getProject()
 
 const config = new pulumi.Config()
-const eksStackProject = config.require("eksProject")
+const k8sStackProject = config.require("k8sProject")
 
-const eksStackName = `${org}/${eksStackProject}/${currentStack}`
-const eksStackRef = new pulumi.StackReference(eksStackName)
+const k8sStackName = `${org}/${k8sStackProject}/${currentStack}`
+const k8sStackRef = new pulumi.StackReference(k8sStackName)
 
-const kubeconfig = eksStackRef.requireOutput("kubeconfig") 
+const kubeconfig = k8sStackRef.requireOutput("kubeconfig") 
 const k8sProvider = new k8s.Provider('k8s-provider', {
   kubeconfig: kubeconfig,
   deleteUnreachable: true

@@ -4,7 +4,7 @@ description: A YAML version of the guestbook-app-py project
 config: 
   org:
     type: string
-  eksProject:
+  k8sProject:
     type: string
 variables: 
   kubeconfig: ${baseInfraStack.outputs["kubeconfig"]}
@@ -13,7 +13,7 @@ resources:
   baseInfraStack:
     type: pulumi:pulumi:StackReference
     properties:
-      name: ${org}/${eksProject}/${pulumi.stack}
+      name: ${org}/${k8sProject}/${pulumi.stack}
   # Create a K8s provider using the kubeconfig retrieved as a stack reference above.
   k8sProvider: 
     type: pulumi:providers:kubernetes

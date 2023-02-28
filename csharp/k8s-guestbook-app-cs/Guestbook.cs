@@ -7,14 +7,13 @@ class Guestbook : Stack
     public Guestbook()
     {
         var config = new Config();
-        var isMiniKube = config.GetBoolean("isMiniKube") ?? false;
         var org = config.Require("org");
-        var eksStackProject = config.Require("eksProject");
+        var k8sStackProject = config.Require("k8sProject");
         var currentStack = Deployment.Instance.StackName;
-        var eksStackName = $"{org}/{eksStackProject}/{currentStack}";
-        var eksStackRef = new StackReference(eksStackName);
+        var k8sStackName = $"{org}/{k8sStackProject}/{currentStack}";
+        var k8sStackRef = new StackReference(k8sStackName);
 
-        var kubeConfig = Output.Format($"{eksStackRef.RequireOutput("kubeconfig").Apply(v => v.ToString())}"); 
+        var kubeConfig = Output.Format($"{k8sStackRef.RequireOutput("kubeconfig").Apply(v => v.ToString())}"); 
         var provider = new K8s.Provider("k8s", new K8s.ProviderArgs {KubeConfig = kubeConfig, DeleteUnreachable = true});
         var options = new ComponentResourceOptions { Provider = provider };
 

@@ -17,7 +17,8 @@ Use one of the "eks-base-infra" projects (e.g. csharp/aws-eks-base-infra, or pyt
   Recommend not using us-east-2 since there's something wonky about that environment when it comes to setting up the public IP for the service. (TODO: Figure out what's wonky there.)
 - `pulumi config set org ORGANIZATION`
   - Where *ORGANIZATION* is the name of the org in which the EKS is launched.
-- `pulumi config set eksProject guestbook-base-eks-infra-cs`
+- `pulumi config set k8sProject guestbook-base-eks-infra-cs`
+  - Or the name of any Pulumi project that deploys a K8s cluster and outputs `kubeconfig`.
 
 # Launch and Use
 ## Prepare the GuestBook Service Project
@@ -34,7 +35,7 @@ However the plugin needs to be installed for the SDK to work.
   ```
   NOTE: use the VERSION retrieved from the `pip list` above. 
 
-- OPTIONALLY: Instead of installing the plugin, you can do the following in a terminal window opened int the `demos/aws-cs-eks-guestbook/guestbook-app` directory:
+- OPTIONALLY: Instead of installing the plugin, you can do the following in a terminal window opened in the folder:
   - `export PATH=$PATH:<PKG_DIR>/bin`
     - Where <PKG_DIR> is the path to the `pulumi-k8s-servicedeployment` package noted above
     - This is done so the pulumi engine can find the package binary (aka plugin).

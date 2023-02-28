@@ -14,9 +14,9 @@ import (
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		cfg := config.New(ctx, "")
-		eksProject := cfg.Require("eksProject")
+		k8sProject := cfg.Require("k8sProject")
 		baseInfraStack, err := pulumi.NewStackReference(ctx, "baseK8sStack", &pulumi.StackReferenceArgs{
-			Name: pulumi.String(fmt.Sprintf("%v/%v/%v", ctx.Organization(), eksProject, ctx.Stack())),
+			Name: pulumi.String(fmt.Sprintf("%v/%v/%v", ctx.Organization(), k8sProject, ctx.Stack())),
 		})
 		if err != nil {
 			return err

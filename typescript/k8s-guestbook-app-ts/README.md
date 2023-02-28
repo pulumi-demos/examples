@@ -5,7 +5,7 @@ Deploys Guestbook app and related containers on an K8s cluster deployed via anot
 **NOTE** This demo uses the `K8sServiceDeployment` package generated in the multilanguage-packages folder. 
 
 This demo highlights the following:
-- Python support: It is written in python.
+- Typescript support: It is written in typescript.
 - Multilanguage Packages: It uses a python module package generated from a multilanguage component written in Golang. 
 - Multistack Architecture: Uses stack reference to a k8s base infrastructure stack and layers on a "Guestbook" application using multiple services deployed using the `K8sServiceDeployment` multilanguage package.
 

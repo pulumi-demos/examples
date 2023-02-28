@@ -5,13 +5,13 @@ from pulumi_k8s_servicedeployment import ServiceDeployment, ServiceDeploymentArg
 
 config = pulumi.Config()
 org = pulumi.get_organization()
-eks_stack_project = config.require("eksProject")
+k8s_stack_project = config.require("k8sProject")
 current_stack = pulumi.get_stack()
 project = pulumi.get_project()
-eks_stack_name = f"{org}/{eks_stack_project}/{current_stack}"
-eks_stack_ref = pulumi.StackReference(eks_stack_name)
+k8s_stack_name = f"{org}/{k8s_stack_project}/{current_stack}"
+k8s_stack_ref = pulumi.StackReference(k8s_stack_name)
 
-kubeconfig = eks_stack_ref.require_output("kubeconfig") 
+kubeconfig = k8s_stack_ref.require_output("kubeconfig") 
 k8s_provider = k8s.Provider('k8s-provider', kubeconfig=kubeconfig, delete_unreachable=True)
 
 guestbook_ns = k8s.core.v1.Namespace("guestbook-py-ns", 
