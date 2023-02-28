@@ -1,5 +1,5 @@
 # Introduction
-Deploys Guestbook app and related containers on an EKS cluster deployed via another stack 
+Deploys Guestbook app and related containers on an k8s cluster deployed via another stack 
 using Golang.
 
 # Demo Overview
@@ -13,14 +13,14 @@ This demo highlights the following:
 # Launch the base K8s infrastructure stack
 This project can deploy on any K8s deployment.  
 However, the setup assumes you will use `python/aws-py-eks-guestbook/eks-base-infra`.  
-That said, any "eks-base-infra" stack can be used.
+That said, any stack that deploys a K8s cluster and outputs `kubeconfig` can be used.
 
 # Setup
 - `cd guestbook-app-yaml`
 - `pulumi config set aws:region us-east-1`
 - `pulumi stack init demo/dev` 
   - This stack (e.g. `dev`) needs to match the stack name for the base K8s stack.
-- `pulumi config set eksProject guestbook-base-eks-infra-py`
+- `pulumi config set k8sProject guestbook-base-eks-infra-py`
   - Use the project name for the base K8s cluster project you are using.
 
 # Launch and Use
@@ -37,7 +37,7 @@ The `guestbook-app` uses the `pulumi_k8s_servicedeployment` package plugin gener
   ```
   NOTE: use the latest VERSION noted from the MAKEFILE as per the earlier step.
 
-- OPTIONALLY: Instead of installing the plugin, you can do the following in a terminal window opened int the `demos/aws-py-eks-guestbook/guestbook-app` directory:
+- OPTIONALLY: Instead of installing the plugin, you can do the following in a terminal window opened in the folder:
   - `export PATH=$PATH:<PKG_DIR>/bin`
     - Where <PKG_DIR> is the path to the `pulumi-k8s-servicedeployment` package noted above
     - This is done so the pulumi engine can find the package binary (aka plugin).

@@ -1,5 +1,5 @@
 # Introduction
-Deploys Guestbook app and related containers on an EKS cluster deployed via another stack 
+Deploys Guestbook app and related containers on an K8s cluster deployed via another stack 
 using Pulumi's YAML provider.
 
 # Demo Overview
@@ -12,8 +12,8 @@ This demo highlights the following:
 
 # Launch the base K8s infrastructure stack
 This project can deploy on any K8s deployment.  
-However, the setup assumes you will use `python/aws-py-eks-guestbook/eks-base-infra`.  
-That said, any "eks-base-infra" stack can be used.
+However, the setup assumes you will use `python/aws-eks-base-infra-py`.  
+That said, any "k8s base infra" stack can be used (e.g. `cs/aws-cs-eks-base-infra-py` or `py/azure-aks-base-infra-py`).
 
 # Setup
 - `cd guestbook-app-yaml`
@@ -22,8 +22,8 @@ That said, any "eks-base-infra" stack can be used.
   - This stack (e.g. `dev`) needs to match the stack name for the base K8s stack.
 - `pulumi config set org ORGANIZATION`
   - Where *ORGANIZATION* is the name of the org in which the base K8s stack is launched.
-- `pulumi config set eksProject guestbook-base-eks-infra-py`
-  - Use `guestbook-base-eks-infra-cs` if deploying on the C# example as the base.
+- `pulumi config set k8sProject aws-eks-base-infra-py`
+  - You can use any of the "base infra" projects in this repo or any K8s project that deploys a K8s cluster and outputs `kubeconfig`.
 
 # Launch and Use
 ## Prepare the GuestBook Service Project
@@ -39,7 +39,7 @@ The `guestbook-app` uses the `pulumi_k8s_servicedeployment` package plugin gener
   ```
   NOTE: use the latest VERSION noted from the MAKEFILE as per the earlier step.
 
-- OPTIONALLY: Instead of installing the plugin, you can do the following in a terminal window opened int the `demos/aws-py-eks-guestbook/guestbook-app` directory:
+- OPTIONALLY: Instead of installing the plugin, you can do the following in a terminal window opened in the folder:
   - `export PATH=$PATH:<PKG_DIR>/bin`
     - Where <PKG_DIR> is the path to the `pulumi-k8s-servicedeployment` package noted above
     - This is done so the pulumi engine can find the package binary (aka plugin).
