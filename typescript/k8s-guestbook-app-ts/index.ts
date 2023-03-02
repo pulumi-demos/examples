@@ -3,18 +3,8 @@ import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
 import * as pulumiService from "@pulumi/pulumiService";
 import * as ServiceDeployment from "@pulumi/k8s-servicedeployment";
+import { kubeconfig, stackTagName, stackTagValue, zoneName  } from "./config";
 
-const org = pulumi.getOrganization()
-const currentStack = pulumi.getStack()
-const project = pulumi.getProject()
-
-const config = new pulumi.Config()
-const k8sStackProject = config.require("k8sProject")
-
-const k8sStackName = `${org}/${k8sStackProject}/${currentStack}`
-const k8sStackRef = new pulumi.StackReference(k8sStackName)
-
-const kubeconfig = k8sStackRef.requireOutput("kubeconfig") 
 const k8sProvider = new k8s.Provider('k8s-provider', {
   kubeconfig: kubeconfig,
   deleteUnreachable: true
@@ -54,7 +44,6 @@ const frontendDnsType = frontend.frontEndIp.apply(ip => {
 })
 
 const dnsName = `guestbook-ts-${pulumi.getStack()}`
-const zoneName = config.require("zoneName")
 const fqdn = `${dnsName}.${zoneName}`
 const zoneId = aws.route53.getZoneOutput({ name: zoneName }).zoneId
 const dnsRecord = new aws.route53.Record("frontEndDnsRecord", {
@@ -65,11 +54,6 @@ const dnsRecord = new aws.route53.Record("frontEndDnsRecord", {
   records: [ frontend.frontEndIp.apply(ip => ip) ]
 })
 
-export const frontEndIp = frontend.frontEndIp
-export const frontEndUrl = `http://${fqdn}`
-
-const stackTagName = config.get("stackTagName") ?? "Application"
-const stackTagValue = config.get("stackTagValue") ?? "Guestbook"
 const stackTag =  new pulumiService.StackTag("stackTag", {
   organization: pulumi.getOrganization(),
   project: pulumi.getProject(),
@@ -77,3 +61,6 @@ const stackTag =  new pulumiService.StackTag("stackTag", {
   name: stackTagName,
   value: pulumi.interpolate`${stackTagValue}-${pulumi.getStack()}`
 })
+
+export const frontEndIp = frontend.frontEndIp
+export const frontEndUrl = `http://${fqdn}`
