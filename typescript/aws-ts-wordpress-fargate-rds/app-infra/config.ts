@@ -1,9 +1,9 @@
-import { Config, getStack, getOrganization, StackReference } from "@pulumi/pulumi";
+import { Config, getStack, getProject, getOrganization, StackReference } from "@pulumi/pulumi";
 
 const config = new Config();
 
 // Config values
-export const nameBase = config.get("nameBase") || `eksbase-${getStack()}`;
+export const nameBase = config.get("nameBase") || `ecs-app-${getStack()}`;
 const baseInfraProject = config.require("baseInfraProject");
 
 // Stack reference and stack outputs

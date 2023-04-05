@@ -2,7 +2,7 @@
  * Deploys:
  * - Network: VPC, Subnets, Security Groups
  * - DB Backend: MySQL RDS
-*/
+ */
 
 // Pulumi SDKs
 import * as pulumi from "@pulumi/pulumi";

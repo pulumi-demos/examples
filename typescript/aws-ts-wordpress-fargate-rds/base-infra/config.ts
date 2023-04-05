@@ -1,10 +1,10 @@
-import { Config, getStack } from "@pulumi/pulumi";
+import { Config, getProject, getStack } from "@pulumi/pulumi";
 import { RandomPassword } from "@pulumi/random";
 
 const config = new Config();
 
 // name base for naming conventions
-export const nameBase = config.get("nameBase") || `eksbase-${getStack()}`;
+export const nameBase = config.get("nameBase") || `ecs-base-${getStack()}`;
 
 // Get db info
 export const dbName = config.get("dbName") || "backend";

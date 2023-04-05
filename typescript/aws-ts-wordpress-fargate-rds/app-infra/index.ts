@@ -1,9 +1,16 @@
+/* 
+ * Deploys:
+ * - Frontend related resources on an ECS cluster
+ */
+
 // Pulumi SDKs
 import * as pulumi from "@pulumi/pulumi";
 import * as pulumiservice from "@pulumi/pulumiservice";
 
 // Local module
 import { nameBase, baseVpcId, dbHost, dbName, dbUser, dbPassword, clusterArn } from "./config";
+
+dbHost.apply(thing => console.log(thing))
 
 // Component resource
 import { Frontend } from "./frontend";
@@ -26,4 +33,6 @@ const stackTag =  new pulumiservice.StackTag("stackTag", {
   name: "Application",
   value: pulumi.interpolate`ECS-Wordpress-${pulumi.getStack()}`
 })
+
+export const frontendUrl = frontend.frontendUrl;
 

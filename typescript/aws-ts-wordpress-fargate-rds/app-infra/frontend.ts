@@ -21,7 +21,11 @@ export class Frontend extends ComponentResource {
 
     // Gather subnet IDs from the VPC
     const vpcId = args.vpcId
-    const subnetIds = ec2.getSubnetIdsOutput({vpcId: vpcId}).ids
+    const subnetIds = ec2.getSubnetsOutput({
+      filters: [
+        {name: "vpc-id", values: [vpcId]},
+      ]
+    }).ids
 
     // Create security group for accessing the application.
     const feSgName = `${name}-fe-sg`
@@ -51,7 +55,7 @@ export class Frontend extends ComponentResource {
             toPort: 0,
             cidrBlocks: ["0.0.0.0/0"],
         }]
-    })
+    }, {parent: this})
 
     // Load balancer to front the application.
     const alb = new lb.LoadBalancer(`${name}-alb`, {
