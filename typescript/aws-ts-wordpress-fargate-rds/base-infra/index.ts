@@ -19,14 +19,6 @@ import { nameBase, dbName, dbUser, dbPassword } from "./config";
 // Create an AWS VPC and subnets, etc
 const network = new Network(`${nameBase}-net`, {})
 
-// Create a backend DB instance
-const db = new Db(`${nameBase}-db`, {
-    dbName: dbName,
-    dbUser: dbUser,
-    dbPassword: dbPassword,
-    subnetIds: network.subnetIds,
-});
-
 // RDS acess security group.
 const rdsSgName = `${nameBase}-rds-sg`
 const rdsSecGroup = new ec2.SecurityGroup(rdsSgName, {
@@ -47,6 +39,17 @@ const rdsSecGroup = new ec2.SecurityGroup(rdsSgName, {
         cidrBlocks: ["0.0.0.0/0"],
     }]
 });
+
+// Create a backend DB instance
+const db = new Db(`${nameBase}-db`, {
+    dbName: dbName,
+    dbUser: dbUser,
+    dbPassword: dbPassword,
+    subnetIds: network.subnetIds,
+    securityGroupIds: [rdsSecGroup.id]
+});
+
+
 
 // Create an ECS cluster onto which applications can be deployed.
 const ecsCluster = new ecs.Cluster(`${nameBase}-ecs`)

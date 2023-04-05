@@ -11,6 +11,9 @@ import * as pulumiservice from "@pulumi/pulumiservice";
 import { nameBase, baseVpcId, dbHost, dbName, dbUser, dbPassword, clusterArn } from "./config";
 
 dbHost.apply(thing => console.log(thing))
+dbName.apply(thing => console.log(thing))
+dbUser.apply(thing => console.log(thing))
+dbPassword.apply(thing => console.log(thing))
 
 // Component resource
 import { Frontend } from "./frontend";
