@@ -1,0 +1,6 @@
+name: aws-ts-fargate-rds-app
+runtime: nodejs
+description: Deploys application on base ECS infrastructure.
+config:
+  aws:region: us-east-2
+  aws-ts-fargate-rds-app:baseInfraProject: aws-ts-fargate-rds-base

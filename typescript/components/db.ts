@@ -6,7 +6,7 @@ export interface DbArgs {
   dbName: string;
   dbUser: string;
   dbPassword: pulumi.Output<string> | undefined;
-  subnetIds: pulumi.Output<string[]>;
+  subnetIds: pulumi.Output<string[]> | pulumi.Output<string>[];
 }
 
 // Creates DB
@@ -43,6 +43,8 @@ export class Db extends pulumi.ComponentResource {
       skipFinalSnapshot: true,
       publiclyAccessible: false,
     }, { parent: this });
+
+
 
     this.dbAddress = db.address;
     this.dbName = db.dbName;
