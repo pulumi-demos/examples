@@ -1,0 +1,3 @@
+name: aws-ts-wordpress-fargate-rds
+runtime: nodejs
+description: Deploys application using ECS-Fargate and RDS.
