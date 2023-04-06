@@ -3,6 +3,9 @@
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
+    "scripts": {
+        "postinstall": "(cd ../components && npm install);"
+    },
     "dependencies": {
         "@pulumi/aws": "^5.0.0",
         "@pulumi/awsx": "^1.0.0",
