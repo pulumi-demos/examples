@@ -1,3 +1,4 @@
+import * as pulumi from "@pulumi/pulumi";
 import { ComponentResource, ComponentResourceOptions, interpolate, Output } from "@pulumi/pulumi";
 import { ec2, ecs, iam, lb } from "@pulumi/aws";
 
@@ -109,6 +110,37 @@ export class Frontend extends ComponentResource {
     const taskName = `${name}-app-task`
     const containerName = `${name}-app-container`
 
+    const containerDefinitions = 
+      pulumi.all([args.dbHost, args.dbName, args.dbUser, args.dbPassword]).apply(([dbHost, dbName, dbUser, dbPassword]) => 
+        JSON.stringify([{
+          'name': containerName,
+          'image': 'wordpress',
+          'portMappings': [{
+              'containerPort': 80,
+              'hostPort': 80,
+              'protocol': 'tcp' 
+          }],
+          'environment': [
+            {
+                'name': 'WORDPRESS_DB_HOST',
+                'value': dbHost
+            },
+            {
+                'name': 'WORDPRESS_DB_NAME',
+                'value': dbName
+            },
+            {
+                'name': 'WORDPRESS_DB_USER',
+                'value': dbUser
+            },
+            {
+                'name': 'WORDPRESS_DB_PASSWORD',
+                'value': dbPassword
+            }
+          ]
+        }])
+      )
+
     const taskDefinition = new ecs.TaskDefinition(taskName, {
       family: "fargate-task-definition",
       cpu: "256",
@@ -116,33 +148,7 @@ export class Frontend extends ComponentResource {
       networkMode: "awsvpc",
       requiresCompatibilities: ["FARGATE"],
       executionRoleArn: role.arn,
-      containerDefinitions: JSON.stringify([{
-        'name': containerName,
-        'image': 'wordpress',
-        'portMappings': [{
-            'containerPort': 80,
-            'hostPort': 80,
-            'protocol': 'tcp' 
-        }],
-        'environment': [
-          {
-              'name': 'WORDPRESS_DB_HOST',
-              'value': args.dbHost
-          },
-          {
-              'name': 'WORDPRESS_DB_NAME',
-              'value': args.dbName
-          },
-          {
-              'name': 'WORDPRESS_DB_USER',
-              'value': args.dbUser
-          },
-          {
-              'name': 'WORDPRESS_DB_PASSWORD',
-              'value': args.dbPassword
-          }
-        ]
-      }]),
+      containerDefinitions: containerDefinitions,
     }, {parent: this})
 
     const service = new ecs.Service(`${name}-app-svc`, {

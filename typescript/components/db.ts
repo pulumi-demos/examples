@@ -8,6 +8,7 @@ export interface DbArgs {
   dbPassword: pulumi.Output<string> | undefined;
   subnetIds: pulumi.Output<string[]> | pulumi.Output<string>[];
   securityGroupIds?: pulumi.Output<string[]> | pulumi.Output<string>[];
+  publicAccess?: boolean;
 }
 
 // Creates DB
@@ -42,7 +43,7 @@ export class Db extends pulumi.ComponentResource {
       instanceClass: "db.t2.micro",
       storageType: "gp2",
       skipFinalSnapshot: true,
-      publiclyAccessible: false,
+      publiclyAccessible: args.publicAccess ?? false,
     }, { parent: this });
 
 

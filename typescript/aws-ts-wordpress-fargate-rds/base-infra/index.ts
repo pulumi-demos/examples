@@ -46,10 +46,8 @@ const db = new Db(`${nameBase}-db`, {
     dbUser: dbUser,
     dbPassword: dbPassword,
     subnetIds: network.subnetIds,
-    securityGroupIds: [rdsSecGroup.id]
+    securityGroupIds: [rdsSecGroup.id],
 });
-
-
 
 // Create an ECS cluster onto which applications can be deployed.
 const ecsCluster = new ecs.Cluster(`${nameBase}-ecs`)
