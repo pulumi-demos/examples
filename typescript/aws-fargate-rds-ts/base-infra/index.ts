@@ -7,7 +7,7 @@
 // Pulumi SDKs
 import * as pulumi from "@pulumi/pulumi";
 import * as pulumiservice from "@pulumi/pulumiservice";
-import { ecs } from "@pulumi/aws";
+import { ec2, ecs } from "@pulumi/aws";
 
 // Components
 import { Network } from "../../components/aws_network";
@@ -19,12 +19,34 @@ import { nameBase, dbName, dbUser, dbPassword } from "./config";
 // Create an AWS VPC and subnets, etc
 const network = new Network(`${nameBase}-net`, {})
 
+// RDS acess security group.
+const rdsSgName = `${nameBase}-rds-sg`
+const rdsSecGroup = new ec2.SecurityGroup(rdsSgName, {
+    vpcId: network.vpcId,
+    description: "Allow DB client access.",
+    tags: { "Name": rdsSgName },
+    ingress: [{
+        cidrBlocks: ["0.0.0.0/0"],
+        fromPort: 3306,
+        toPort: 3306,
+        protocol: "tcp",
+        description: "Allow RDS access."
+    }],
+    egress: [{
+        protocol: "-1",
+        fromPort: 0,
+        toPort: 0,
+        cidrBlocks: ["0.0.0.0/0"],
+    }]
+});
+
 // Create a backend DB instance
 const db = new Db(`${nameBase}-db`, {
     dbName: dbName,
     dbUser: dbUser,
     dbPassword: dbPassword,
     subnetIds: network.subnetIds,
+    securityGroupIds: [rdsSecGroup.id]
 });
 
 // Create an ECS cluster onto which applications can be deployed.

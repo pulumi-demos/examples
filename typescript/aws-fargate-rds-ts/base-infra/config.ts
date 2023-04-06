@@ -14,8 +14,7 @@ export let dbPassword = config.getSecret("dbPassword");
 if (!dbPassword) {
   dbPassword = new RandomPassword("dbPassword", {
     length: 16,
-    special: true,
-    overrideSpecial: "_%",
+    special: false,
   }).result;
 }
 

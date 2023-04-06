@@ -46,8 +46,6 @@ export class Db extends pulumi.ComponentResource {
       publiclyAccessible: args.publicAccess ?? false,
     }, { parent: this });
 
-
-
     this.dbAddress = db.address;
     this.dbName = db.dbName;
     this.dbUser = db.username;
