@@ -1,7 +1,8 @@
 {
-    "name": "aws-ts-eks",
+    "name": "aws-ts-wordpress-fargate-rds",
+    "main": "index.ts",
     "devDependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^16"
     },
     "scripts": {
         "postinstall": "(cd ../components && npm install);"
@@ -9,7 +10,8 @@
     "dependencies": {
         "@pulumi/aws": "^5.0.0",
         "@pulumi/awsx": "^1.0.0",
-        "@pulumi/pulumi": "^3.32.1",
-        "@pulumi/pulumiservice": "^0.1.8"
+        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/pulumiservice": "^0.4.0",
+        "@pulumi/random": "^4.12.1"
     }
 }

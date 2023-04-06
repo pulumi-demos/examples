@@ -5,7 +5,7 @@ import * as awsx from "@pulumi/awsx";
 import * as k8s from "@pulumi/kubernetes";
 
 // Component Resources
-import { Db } from "./db";
+import { Db } from "../components/aws_rds";
 
 // Local Modules 
 // Config data

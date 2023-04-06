@@ -24,6 +24,7 @@ python/azure-aks-base-infra-py |:heavy_check_mark:|:heavy_check_mark:| | | | Pro
 python/k8s-guestbook-app-py | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 typescript/aws-eks-base-infra-ts |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Config secret for DB password; Component for DB; Can be used as base K8s for a guestbook stack.
 typescript/aws-ts-serverless | | | | | | Simplest pulumi program for super quick deployments.
+typescript/aws-fargate-rds-ts |:heavy_check_mark:|:heavy_check_mark:| |:heavy_check_mark:| | Can be used to show config secrets, component resources, multi-stack and stack referenes.
 typescript/gcp-gke-base-infra-ts |:heavy_check_mark:|:heavy_check_mark:| | | | Programmatic secrets to encrypt kubeconfig; Component resource; Can be used as base K8s for a guestbook stack.
 typescript/k8s-guestbook-app-ts| | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.
 yaml/k8s-guestbook-app-yaml | | |:heavy_check_mark:|:heavy_check_mark:| | Uses stack references for base stack; Uses golang-based MLC.

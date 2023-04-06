@@ -6,7 +6,9 @@ export interface DbArgs {
   dbName: string;
   dbUser: string;
   dbPassword: pulumi.Output<string> | undefined;
-  subnetIds: pulumi.Output<string[]>;
+  subnetIds: pulumi.Output<string[]> | pulumi.Output<string>[];
+  securityGroupIds?: pulumi.Output<string[]> | pulumi.Output<string>[];
+  publicAccess?: boolean;
 }
 
 // Creates DB
@@ -33,7 +35,7 @@ export class Db extends pulumi.ComponentResource {
       dbName: args.dbName,
       username: args.dbUser,
       password: args.dbPassword,
-      // vpcSecurityGroupIds: args.securityGroupIds,
+      vpcSecurityGroupIds: args.securityGroupIds,
       dbSubnetGroupName: rdsSubnetGroup.name,
       allocatedStorage: 20,
       engine: "mysql",
@@ -41,7 +43,7 @@ export class Db extends pulumi.ComponentResource {
       instanceClass: "db.t2.micro",
       storageType: "gp2",
       skipFinalSnapshot: true,
-      publiclyAccessible: false,
+      publiclyAccessible: args.publicAccess ?? false,
     }, { parent: this });
 
     this.dbAddress = db.address;
