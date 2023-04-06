@@ -1,3 +1,0 @@
-config:
-  aws-ts-fargate-rds-base:dbPassword:
-    secure: AAABABLdTeK6zH1P2gAQGq/ddL8zwLtZJytRC/t3VlEqqoCMBn6bIP2eQ/A=
