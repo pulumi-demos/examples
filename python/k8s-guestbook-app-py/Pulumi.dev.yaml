@@ -1,2 +1,0 @@
-config:
-  k8s-guestbook-app-py:k8sProject: aws-eks-base-infra-ts

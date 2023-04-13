@@ -3,16 +3,15 @@
 This example provisions a [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/) cluster, using
 infrastructure-as-code, and then deploys a Kubernetes Deployment into it, to test that the cluster is working. This
 demonstrates that you can manage both the Kubernetes objects themselves, in addition to underlying cloud infrastructure,
-using a single configuration language (in this case, TypeScript), tool, and workflow.
+using a single configuration language (in this case, Python), tool, and workflow.
 
 # Demo Overview
 
 This demo highlights the following:
-- Typescript support: It is written in Typescript.
-  - Uses a standard typescript pattern of putting code in a separate file (config.ts).
+- Python support: It is written in Python.
 - Component Resources: Uses component resource for cluster and related resources.
 - Uses programmatic secrets to encrypt the kubeconfig output.
-- Can be used in conjunction with one of the guestbook project to demonstrate, among other things, stack references.
+- Can be used in conjunction with one of the guestbook projects to demonstrate, among other things, stack references.
 
 ## Prerequisites
 
@@ -42,13 +41,13 @@ After cloning this repo, `cd` into it and run these commands. A GKE Kubernetes c
     $ pulumi config set gcp:zone us-west1-a # any valid GCP zone here
     ```
 
-   By default, your cluster will have 3 nodes of type `n1-standard-1`. This is configurable, however; for instance
+   By default, your cluster will have 3 node of type `n1-standard-1`. This is configurable, however; for instance
    if we'd like to choose 5 nodes of type `n1-standard-2` instead, we can run these commands:
 
    ```bash
-   $ pulumi config set nodeCount 5
-   $ pulumi config set nodeMachineType n1-standard-2
-   $ pulumi config set masterVersion #any valid MasterVersion
+   $ pulumi config set node_count 5
+   $ pulumi config set node_machine_type n1-standard-2
+   $ pulumi config set master_version #any valid MasterVersion
    ```
 
    This shows how stacks can be configurable in useful ways. You can even change these after provisioning.
