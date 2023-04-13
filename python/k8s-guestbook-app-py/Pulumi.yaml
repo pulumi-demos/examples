@@ -4,3 +4,5 @@ runtime:
   options:
     virtualenv: venv
 description: Kubernetes Guestbook example based on https://kubernetes.io/docs/tutorials/stateless-application/guestbook/
+config:
+  k8s-guestbook-app-py:k8sProject: aws-eks-base-infra-py

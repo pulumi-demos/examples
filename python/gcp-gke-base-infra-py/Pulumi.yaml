@@ -1,6 +1,9 @@
-name: gcp-gke-base-infra-ts
+name: gcp-gke-base-infra-py
+runtime:
+  name: python
+  options:
+    virtualenv: venv
 description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
-runtime: nodejs
 config:
   gcp:project: pulumi-ce-team
   gcp:zone: us-central1-a
