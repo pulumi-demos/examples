@@ -14,6 +14,5 @@ arrangements:
     - typescript/aws-ts-serverless
 - name: Guestbook 
   project-folders:
-    - csharp/aws-cs-eks-guestbook/eks-base-infra
-    - csharp/aws-cs-eks-guestbook/guestbook-app
-    - yaml/aws-yaml-eks-guestbook/guestbook-app-yaml
+    - python/aws-eks-base-infra-py
+    - yaml/k8s-guestbook-app-yaml
