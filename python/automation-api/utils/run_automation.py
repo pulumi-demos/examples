@@ -24,5 +24,5 @@ def run_automation(base_folder: str, arrangements_file: str, arrangement_name: s
     prep_workspaces(arrangement_projects)
 
     # update or destroy each of the stacks that make up the arrangement
-    update_stacks(arrangement_projects, destroy)
+    return(update_stacks(arrangement_projects, destroy))
 
