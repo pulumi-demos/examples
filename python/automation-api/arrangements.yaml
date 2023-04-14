@@ -15,5 +15,4 @@ arrangements:
 - name: Guestbook 
   project-folders:
     - python/aws-eks-base-infra-py
-    - typescript/k8s-guestbook-app-ts
     - yaml/k8s-guestbook-app-yaml
