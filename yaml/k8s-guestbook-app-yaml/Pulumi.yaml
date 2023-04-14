@@ -4,8 +4,7 @@ description: A YAML version of the guestbook-app-py project
 config: 
   org:
     type: string
-  k8sProject:
-    type: string
+  k8sProject: aws-eks-base-infra-py
 variables: 
   kubeconfig: ${baseInfraStack.outputs["kubeconfig"]}
 resources: 
@@ -56,7 +55,7 @@ resources:
   bucket:
     type: aws:s3:Bucket
     properties:
-      acl: public-read
+      acl: private
 outputs:
   frontEndUrl: http://${frontend.frontEndIp}
   bucketId: ${bucket.id}
