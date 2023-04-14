@@ -3,9 +3,9 @@ from utils.project import get_project_info
 from utils.runtime import prep_workspaces
 from utils.stack import update_stacks 
 
-def run_automation(arrangements_file: str, arrangement_name: str, org: str, stack: str, destroy: bool):
+def run_automation(base_folder: str, arrangements_file: str, arrangement_name: str, org: str, stack: str, destroy: bool):
 
-    arrangement_info = get_arrangement_info(arrangements_file, arrangement_name)
+    arrangement_info = get_arrangement_info(base_folder, arrangements_file, arrangement_name)
 
     arrangement_projects = []
     for project_folder in arrangement_info["project_folders"]:

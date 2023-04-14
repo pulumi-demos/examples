@@ -6,12 +6,10 @@ import yaml
 # - name of the arrangement being deployed
 # Outputs:
 # - List of the full paths for the project(s) that make up the arrangement.
-def get_arrangement_info(arrangements_file: str, arrangement_name: str):
+def get_arrangement_info(base_folder: str, arrangements_file: str, arrangement_name: str):
   # Parse the arrangements yaml and get the info for the specified arrangement 
   with open(arrangements_file) as f:
       arrangements_config = yaml.safe_load(f)
-  # Get the base_folder information from the arrangements file
-  base_folder = arrangements_config["base-folder"]
   # Get the list of arrangements from the arrangements file.
   arrangements = arrangements_config["arrangements"]
   # Get the specified arrangement

@@ -60,32 +60,32 @@ def update_stacks(projects, destroy: bool):
 # that can be destroyed.
 # I only want to present the "BigDeployment" deployment so destroying it will handle things in the
 # correct order.
-def get_existing_deployments():
-    existing_deployments = []
-    existing_stacks = []
-    # Get the raw deployment options including the related projects from the deployment options json file
-    deployment_options_projects = list(get_deployment_options_array())
-    # Sort this based on the number of projects for each deployment option from most to least.
-    # This will enable logic below to avoid returning deployment options that are actually stacks that are part of multi-stack deployments.
-    deployment_options_projects.sort(key=lambda x: len(list(x["projects"])), reverse=True)
-    print("sorted deployment options", deployment_options_projects)
-    for deployment_option_projects in deployment_options_projects:
-        deployment_option = deployment_option_projects["name"]
-        deployment_projects = deployment_option_projects["projects"]
-        for deployment_project in deployment_projects:
-            # Set project_dir for the requested project
-            project_base_dir = get_project_base_dir()
-            project_dir = os.path.join(os.path.dirname(__file__), project_base_dir, deployment_project) 
-            ws = auto.LocalWorkspace(project_dir)
-            stacks = ws.list_stacks()
-            for stack in stacks:
-                if (stack.resource_count > 0):
-                    existing_stack = f'{deployment_project}/{stack.name}'
-                    existing_deployment = f'{deployment_option}/{stack.name}'
-                    if (existing_stack not in existing_stacks):
-                        existing_stacks.append(existing_stack)
-                        if (existing_deployment not in existing_deployments):
-                            # If we have a deployment that uses two projects, given that we sorted biggest to smallest, that second project won't be noted as an existing deployment.
-                            existing_deployments.append(existing_deployment)
-    return(existing_deployments)
+# def get_existing_deployments():
+#     existing_deployments = []
+#     existing_stacks = []
+#     # Get the raw deployment options including the related projects from the deployment options json file
+#     deployment_options_projects = list(get_deployment_options_array())
+#     # Sort this based on the number of projects for each deployment option from most to least.
+#     # This will enable logic below to avoid returning deployment options that are actually stacks that are part of multi-stack deployments.
+#     deployment_options_projects.sort(key=lambda x: len(list(x["projects"])), reverse=True)
+#     print("sorted deployment options", deployment_options_projects)
+#     for deployment_option_projects in deployment_options_projects:
+#         deployment_option = deployment_option_projects["name"]
+#         deployment_projects = deployment_option_projects["projects"]
+#         for deployment_project in deployment_projects:
+#             # Set project_dir for the requested project
+#             project_base_dir = get_project_base_dir()
+#             project_dir = os.path.join(os.path.dirname(__file__), project_base_dir, deployment_project) 
+#             ws = auto.LocalWorkspace(project_dir)
+#             stacks = ws.list_stacks()
+#             for stack in stacks:
+#                 if (stack.resource_count > 0):
+#                     existing_stack = f'{deployment_project}/{stack.name}'
+#                     existing_deployment = f'{deployment_option}/{stack.name}'
+#                     if (existing_stack not in existing_stacks):
+#                         existing_stacks.append(existing_stack)
+#                         if (existing_deployment not in existing_deployments):
+#                             # If we have a deployment that uses two projects, given that we sorted biggest to smallest, that second project won't be noted as an existing deployment.
+#                             existing_deployments.append(existing_deployment)
+#     return(existing_deployments)
 

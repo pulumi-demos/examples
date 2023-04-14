@@ -11,7 +11,8 @@ stack = args.stack
 destroy = args.destroy
 arrangements_file = "./arrangements.yaml"
 
-run_automation(arrangements_file, arrangement_name, org, stack, destroy)
+# The Pulumi projects are up two levels.
+run_automation("../..", arrangements_file, arrangement_name, org, stack, destroy)
 
 
 
