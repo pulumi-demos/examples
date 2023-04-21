@@ -4,10 +4,12 @@ import (
 	"github.com/pulumi/pulumi-aws/sdk/v5/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v5/go/aws/eks"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
+
 		// Read back the default VPC and public subnets, which we will use.
 		t := true
 		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{Default: &t})
@@ -71,14 +73,23 @@ func main() {
 			return err
 		}
 
+		// Get config
+		conf := config.New(ctx, "")
+		desiredSize, err := conf.TryInt("desiredSize")
+		maxSize, err := conf.TryInt("maxSize")
+		if (maxSize < desiredSize) {
+			// maxSize can't be smaller than desiredSize, so fix it.
+			maxSize = desiredSize
+		}
+
 		_, err = eks.NewNodeGroup(ctx, "node-group-2", &eks.NodeGroupArgs{
 			ClusterName:   eksCluster.Name,
 			NodeGroupName: pulumi.String("demo-eks-nodegroup-2"),
 			NodeRoleArn:   pulumi.StringInput(eksIam.nodeGroupRoleArn),
 			SubnetIds:     toPulumiStringArray(subnet.Ids),
 			ScalingConfig: &eks.NodeGroupScalingConfigArgs{
-				DesiredSize: pulumi.Int(2),
-				MaxSize:     pulumi.Int(2),
+				DesiredSize: pulumi.Int(desiredSize),
+				MaxSize:     pulumi.Int(maxSize),
 				MinSize:     pulumi.Int(1),
 			},
 		})
