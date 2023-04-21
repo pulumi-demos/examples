@@ -10,6 +10,7 @@
         "@pulumi/aws": "^5.0.0",
         "@pulumi/awsx": "^1.0.0",
         "@pulumi/pulumi": "^3.32.1",
-        "@pulumi/pulumiservice": "^0.1.8"
+        "@pulumi/pulumiservice": "^0.1.8",
+        "@pulumi/random": "^4.12.1"
     }
 }
