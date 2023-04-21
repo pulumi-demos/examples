@@ -1,3 +1,7 @@
 name: aws-eks-base-infra-go
 runtime: go
 description: AWS EKS deployment
+config:
+  aws:region: us-east-2
+  aws-eks-base-infra-go:desiredSize: "2"
+  aws-eks-base-infra-go:maxSize: "4"
