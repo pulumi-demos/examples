@@ -17,7 +17,3 @@ bucket.onObjectCreated("logger", new aws.lambda.CallbackFunction<aws.s3.BucketEv
 }));
 
 export const bucketName = bucket.bucket;
-
-// CI/CD Demo change #2
-
-

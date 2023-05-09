@@ -1,10 +1,10 @@
-# AWS C# EKS Cluster
+# AWS Go EKS Cluster
 This example creates an AWS EKS Cluster 
 
 # Demo Overview
 
 This demo highlights the following:
-- C# support: It is written in C#.
+- Golang support: It is written in Go.
 - Uses programmatic secrets to encrypt the kubeconfig output.
 - Can be used in conjunction with one of the guestbook project to demonstrate, among other things, stack references.
 

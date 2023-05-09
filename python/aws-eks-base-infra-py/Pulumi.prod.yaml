@@ -1,5 +1,2 @@
 config:
-  aws:region: us-east-1
-  aws-eks-base-infra-py:desired_count: "5"
-  aws-eks-base-infra-py:max_count: "8"
-  aws-eks-base-infra-py:min_count: "2"
+  aws-eks-base-infra-py:max_count: "10"

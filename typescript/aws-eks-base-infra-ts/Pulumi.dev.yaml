@@ -1,3 +1,0 @@
-config:
-  aws-eks-base-infra-ts:maxCount: "3"
-  aws:region: us-east-2
