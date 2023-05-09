@@ -66,7 +66,7 @@ func main() {
 			return err
 		}
 		bucket, err := s3.NewBucket(ctx, "bucket", &s3.BucketArgs{
-			Acl: pulumi.String("public-read"),
+			Acl: pulumi.String("private"),
 		})
 		if err != nil {
 			return err

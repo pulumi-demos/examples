@@ -1,8 +1,6 @@
 name: aws-eks-base-infra-ts
 description: EKS cluster 
 runtime: nodejs
-template:
-  config:
-    aws:region:
-      description: The AWS region to deploy into
-      default: us-west-2
+config:
+  aws-eks-base-infra-ts:maxCount: "3"
+  aws:region: us-east-2
