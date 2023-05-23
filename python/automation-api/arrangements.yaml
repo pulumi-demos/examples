@@ -9,6 +9,9 @@ base-folder: ../..
 
 # Array of arrangements and the related project folder(s) for each arrangement.
 arrangements:
+- name: WordPress on ECS
+  project-folders:
+    - python/aws-py-wordpress-fargate-rds
 - name: AWS Serverless
   project-folders:
     - typescript/aws-ts-serverless
@@ -16,3 +19,6 @@ arrangements:
   project-folders:
     - python/aws-eks-base-infra-py
     - yaml/k8s-guestbook-app-yaml
+- name: Base EKS Infrastructure 
+  project-folders:
+    - python/aws-eks-base-infra-py

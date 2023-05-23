@@ -1,11 +1,10 @@
 {
     "name": "aws-typescript",
-    "dependencies": {
-        "@pulumi/aws": "^3.34.2",
-        "@pulumi/aws-quickstart-vpc": "^0.0.2",
-        "@pulumi/pulumi": "^2.12.1"
-    },
     "devDependencies": {
         "@types/node": "latest"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^5.41.0",
+        "@pulumi/pulumi": "^3.68.0"
     }
 }
