@@ -7,7 +7,6 @@ import * as random from "@pulumi/random";
 const config = new pulumi.Config();
 const azConfig = new pulumi.Config("azure-native")
 
-
 export var k8sVersion = config.get("k8sVersion") || azure.containerservice.getKubernetesServiceVersions({
         location: azConfig.require("location")
     }).then(current => current.latestVersion)
@@ -17,10 +16,7 @@ export const password = config.get("password") || new random.RandomPassword("pw"
     special: true,
 }).result;
 
-
-
 export const adminUserName = config.get("adminUserName") || "testuser";
-
 
 export const nodeCount = config.getNumber("nodeCount") || 2;
 
