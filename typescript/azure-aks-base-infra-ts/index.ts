@@ -29,9 +29,9 @@ const k8sProvider = new k8s.Provider("k8sprovider", {
     kubeconfig: kubeconfig
 })
 
-const name = `aksbase-${pulumi.getStack()}`;
+const name = `canary-${pulumi.getStack()}`;
 const canaryLabels = { app: `canary` };
-const canary = new k8s.apps.v1.Deployment(`canary-${name}`, {
+const canary = new k8s.apps.v1.Deployment(name, {
     spec: {
         selector: { matchLabels: canaryLabels },
         replicas: 1,
