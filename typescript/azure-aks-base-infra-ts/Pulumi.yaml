@@ -1,0 +1,5 @@
+name: azure-aks-base-infra-ts
+runtime: nodejs
+description: Pulumi base project to deploy AKS base infrastructure
+config:
+  azure-native:location: CentralUS
