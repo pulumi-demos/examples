@@ -21,12 +21,16 @@ export class Cluster extends pulumi.ComponentResource {
         super("custom:resource:AzureCluster", name, args, opts);
     
         const appName = `${name}-app`
+        const currentClient = azuread.getClientConfig()
+        const clientOwners = currentClient.then(current => [current.objectId])
         const adApp = new azuread.Application(appName, {
-            displayName: appName
+            displayName: appName,
+            owners: clientOwners,
         }, {parent: this});
 
         const adSp = new azuread.ServicePrincipal(`${name}-sp`, {
             applicationId: adApp.applicationId,
+            appRoleAssignmentRequired: false,
         }, {parent: this});
 
         const adSpPassword = new azuread.ServicePrincipalPassword(`${name}-sp-pwd`, {
@@ -38,7 +42,6 @@ export class Cluster extends pulumi.ComponentResource {
             rsaBits: 4096,
         }, {parent: this});
         const sshPublicKey = generatedKeyPair.publicKeyOpenssh;
-
 
         const k8sCluster = new containerservice.ManagedCluster(`${name}-cluster`, {
             resourceGroupName: args.resourceGroupName,
@@ -64,7 +67,7 @@ export class Cluster extends pulumi.ComponentResource {
                     }],
                 },
             },
-            nodeResourceGroup: "node-resource-group",
+            nodeResourceGroup: `${name}-cluster-node-rg`,
             servicePrincipalProfile: {
                 clientId: adApp.applicationId,
                 secret: adSpPassword.value,
