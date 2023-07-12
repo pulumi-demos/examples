@@ -15,6 +15,16 @@ Provides an example of using automation API using Python.
 
 ## Running the Example
 
+* Set up venv
+  ```bash
+  $ python3 -m venv venv
+  $ source ./venv/bin/activate
+  ```
+* Install packages
+  ```bash
+  $ pip install -r requirements.txt
+  ```
 * Modify the `arrangements.yaml` file as you wish or use it as-is.
-* Run `python ./automation.py`
+* Run `python ./automation.py` for USAGE information
+  * e.g. `python ./automation.py -a "WordPress on ECS" -o MyOrgName -s dev`
 
