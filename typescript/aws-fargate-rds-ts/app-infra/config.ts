@@ -1,4 +1,4 @@
-import { Config, getStack, getProject, getOrganization, StackReference } from "@pulumi/pulumi";
+import { Config, getStack, getProject, getOrganization, StackReference, interpolate } from "@pulumi/pulumi";
 
 const config = new Config();
 
@@ -14,3 +14,7 @@ export const dbName = baseStackRef.getOutput("dbName")
 export const dbUser = baseStackRef.getOutput("dbUser")
 export const dbPassword = baseStackRef.getOutput("dbPassword")
 export const clusterArn = baseStackRef.getOutput("ecsClusterArn")
+
+// stack tags used to group stacks in the service.
+export const stackTagName = config.get("stackTagName") ?? "Application";
+export const stackTagValue = config.get("stackTagValue") ?? interpolate`ECS-Wordpress-${getStack()}`

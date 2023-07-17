@@ -14,7 +14,7 @@ import { Network } from "../../components/aws_network";
 import { Db } from "../../components/aws_rds";
 
 // Local Modules
-import { nameBase, dbName, dbUser, dbPassword } from "./config";
+import { nameBase, dbName, dbUser, dbPassword, stackTagName, stackTagValue } from "./config";
 
 // Create an AWS VPC and subnets, etc
 const network = new Network(`${nameBase}-net`, {})
@@ -57,8 +57,8 @@ const stackTag =  new pulumiservice.StackTag("stackTag", {
     organization: pulumi.getOrganization(),
     project: pulumi.getProject(),
     stack: pulumi.getStack(),
-    name: "Application",
-    value: pulumi.interpolate`ECS-Wordpress-${pulumi.getStack()}`
+    name: stackTagName,
+    value: stackTagValue
 })
 
 export const vpcId = network.vpcId;
