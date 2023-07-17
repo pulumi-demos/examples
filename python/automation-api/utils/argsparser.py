@@ -8,4 +8,5 @@ def create_parser():
   parser.add_argument("-o", "--org", required=True, help="name of organization name use")
   parser.add_argument("-s", "--stack",  required=True, help="stack name (e.g. dev, prod)")
   parser.add_argument("-d", "--destroy", action="store_true", help="destroy the arrangement")
+  parser.add_argument("-c", "--config", nargs="*", help="(optional) one or more configuration inputs of the form (namespace is optional): '[namespace]:configname=value'")
   return parser

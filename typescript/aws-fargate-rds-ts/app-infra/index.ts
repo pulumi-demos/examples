@@ -8,7 +8,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as pulumiservice from "@pulumi/pulumiservice";
 
 // Local module
-import { nameBase, baseVpcId, dbHost, dbName, dbUser, dbPassword, clusterArn } from "./config";
+import { nameBase, baseVpcId, dbHost, dbName, dbUser, dbPassword, clusterArn, stackTagName, stackTagValue } from "./config";
 
 // Component resource
 import { Frontend } from "./frontend";
@@ -28,8 +28,8 @@ const stackTag =  new pulumiservice.StackTag("stackTag", {
   organization: pulumi.getOrganization(),
   project: pulumi.getProject(),
   stack: pulumi.getStack(),
-  name: "Application",
-  value: pulumi.interpolate`ECS-Wordpress-${pulumi.getStack()}`
+  name: stackTagName,
+  value: stackTagValue
 })
 
 export const frontendUrl = frontend.frontendUrl;

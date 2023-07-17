@@ -13,13 +13,17 @@ def update_stacks(projects, destroy: bool):
         dir = project["project_dir"]
         org = project["org"]
         stack = project["stack"]
+        configs = project["config"]
 
         stack_name = f"{org}/{name}/{stack}"
         stack = auto.create_or_select_stack(stack_name=stack_name, work_dir=dir)
         print("successfully initialized stack")
 
-        ### TO-DO: Make config part of arrangements or assumed to be in hierarchical config ...
         print("setting up config")
+        # Process configs list of name-value pairs and set the stack config accordingly.
+        for config in configs:
+            stack.set_config(config["name"], auto.ConfigValue(value=config["value"]))
+        ### TO-DO: Make provider config part of arrangements 
         stack.set_config("aws:region", auto.ConfigValue(value="us-east-2"))
         stack.set_config("azure-native:location", auto.ConfigValue(value="CentralUS"))
         stack.set_config("org", auto.ConfigValue(value=org))

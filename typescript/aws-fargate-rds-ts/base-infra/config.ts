@@ -1,4 +1,5 @@
-import { Config, getProject, getStack } from "@pulumi/pulumi";
+
+import { Config, getProject, getStack, interpolate } from "@pulumi/pulumi";
 import { RandomPassword } from "@pulumi/random";
 
 const config = new Config();
@@ -20,5 +21,5 @@ if (!dbPassword) {
 
 // stack tags used to group stacks in the service.
 export const stackTagName = config.get("stackTagName") ?? "Application";
-export const stackTagValue = config.get("stackTagValue") ?? "Guestbook";
+export const stackTagValue = config.get("stackTagValue") ?? interpolate`ECS-Wordpress-${getStack()}`
 
