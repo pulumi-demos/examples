@@ -41,3 +41,14 @@ def run_automation(base_folder: str, arrangements_file: str, arrangement_name: s
     # update or destroy each of the stacks that make up the arrangement
     return(update_stacks(arrangement_projects, destroy))
 
+# Function to take a string of "CONFIGITEM1=VALUE CONFIGITEM2=VALUE2 ..." and generate the array of {CONFIGITEM:VALUE}
+# objects consumed by the automation code.
+def gen_config_list(config_params: list):
+  config=[]
+  for config_param in config_params:
+      config_name_value = config_param.split("=")
+      config.append({
+          "name":config_name_value[0],
+          "value":config_name_value[1]
+      })
+  return(config)
