@@ -45,10 +45,11 @@ def run_automation(base_folder: str, arrangements_file: str, arrangement_name: s
 # objects consumed by the automation code.
 def gen_config_list(config_params: list):
   config=[]
-  for config_param in config_params:
-      config_name_value = config_param.split("=")
-      config.append({
-          "name":config_name_value[0],
-          "value":config_name_value[1]
+  if config_params:
+    for config_param in config_params:
+        config_name_value = config_param.split("=")
+        config.append({
+            "name":config_name_value[0],
+            "value":config_name_value[1]
       })
   return(config)
