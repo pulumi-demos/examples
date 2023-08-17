@@ -1,0 +1,5 @@
+config:
+  aws-webserver:instance_count: "3"
+  aws-webserver:instance_type: t3.medium
+  aws:profile: pulumi-ce
+  aws:region: us-west-2
