@@ -64,12 +64,6 @@ sg = ec2.SecurityGroup(
     tags=tags
 )
 
-user_data = """
-#!/bin/bash
-echo "Hello, World!" > index.html
-nohup python -m SimpleHTTPServer 80 &
-"""
-
 outputs = []
 for i in range(instance_count):
     user_data = f"""
