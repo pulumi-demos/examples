@@ -4,4 +4,4 @@ pulumi-azure-native>=2.0.0,<3.0.0
 pulumi-kubernetes>=3.21.2,<4.0.0
 pulumi-azuread>=5.28.0,<6.0.0
 pulumi-tls>=4.6.1,<5.0.0
--e ../components
+demo-components @ git+https://github.com/pulumi-demos/examples.git#subdirectory=python/components
