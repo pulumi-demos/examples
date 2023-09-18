@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 requirements = []  # This could be retrieved from requirements.txt
 # Package (minimal) configuration
 setup(
-    name="components",
+    name="demo_components",
     version="0.0.1",
     description="component resources",
     py_modules=["aws_rds_backend", "aws_ecs_frontend", "aws_network", "azure_aks"],
