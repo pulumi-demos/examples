@@ -4,5 +4,4 @@ runtime:
   options:
     virtualenv: venv
 description: A minimal AWS Python Pulumi program
-config:
-  aws:region: us-east-1
+
