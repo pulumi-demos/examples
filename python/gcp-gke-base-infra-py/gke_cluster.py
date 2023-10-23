@@ -52,7 +52,8 @@ class GkeCluster(ComponentResource):
                                         ),
                                         version=master_version,
                                         management=container.NodePoolManagementArgs(
-                                          auto_repair=True
+                                          auto_repair=True,
+                                          auto_upgrade=True,
                                         ),
                                         opts=ResourceOptions(parent=self, depends_on=[k8s_cluster]))
 
