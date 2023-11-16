@@ -4,3 +4,12 @@ runtime:
   options:
     virtualenv: venv
 description: A minimal Python Pulumi program
+template:
+  config: 
+    aws:region:
+      description: The AWS region to deploy to
+      default: us-east-2
+    aws-webserver:instance_count:
+      description: Number of instances to deploy
+      default: 1
+  
