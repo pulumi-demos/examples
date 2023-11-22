@@ -3,9 +3,6 @@
     "devDependencies": {
         "@types/node": "latest"
     },
-    "scripts": {
-        "preinstall": "echo **** HELLO WORLD *****"
-    },
     "dependencies": {
         "@pulumi/aws": "^5.41.0",
         "@pulumi/pulumi": "^3.68.0"
