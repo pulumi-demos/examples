@@ -1,0 +1,6 @@
+config:
+  aws-webserver:instance_count: "1"
+  aws:region: us-east-2
+  pulumi:template: https://github.com/pulumi-demos/examples/python/aws-webserver
+environment:
+  - boog-test
