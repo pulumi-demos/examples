@@ -90,6 +90,8 @@ class AksCluster(ComponentResource):
             resource_group_name=rg_name,
             resource_name=k8s_cluster.name)
 
+        self.cluster_name = k8s_cluster.name
+
         self.kubeconfig = creds.kubeconfigs[0].value.apply(
             lambda enc: base64.b64decode(enc).decode())
 
