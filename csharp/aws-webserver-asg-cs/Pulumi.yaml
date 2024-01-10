@@ -1,4 +1,4 @@
-name: aws-cs-web-asg
+name: aws-webserver-asg-cs
 runtime: dotnet
 description: Auto-scaling Webserver in C#.
 
