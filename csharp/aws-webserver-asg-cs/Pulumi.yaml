@@ -1,8 +1,8 @@
 name: aws-webserver-asg-cs
 runtime: dotnet
-description: Auto-scaling Webserver Demo [aws, csharp].
+description: Auto-scaling Webserver [AWS, C#].
 
 pulumi:disable-default-providers: ["*"]
 
 template:
-  description: Auto-scaling Webserver in C#.
+  description: Auto-scaling Webserver [AWS, C#].
