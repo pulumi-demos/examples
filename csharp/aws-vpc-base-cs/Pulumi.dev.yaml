@@ -1,0 +1,8 @@
+config:
+  aws-cs-landingzone:CidrBlock: 10.1.0.0/20
+  aws-cs-landingzone:NumberOfAzs: "2"
+  aws-cs-landingzone:enableNAT: "true"
+  aws-cs-landingzone:gatewayEndpointServices:
+    - 's3'
+environment:
+  - aws
