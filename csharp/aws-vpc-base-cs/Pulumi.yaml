@@ -1,3 +1,6 @@
 name: aws-vpc-base-cs
 runtime: dotnet
-description: Deploy an AWS VPC [aws, csharp]
+description: Deploy an AWS VPC
+
+template:
+  description: Deploy an AWS VPC [C#]
