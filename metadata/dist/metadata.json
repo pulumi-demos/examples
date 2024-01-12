@@ -1,0 +1,269 @@
+{
+    "architectures": [
+        {
+            "name": "Static Website",
+            "slug": "static-website",
+            "groups": [
+                {
+                    "name": "Static Website",
+                    "kind": "architecture",
+                    "parent": "static-website",
+                    "slug": "aws",
+                    "clouds": [
+                        "aws"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Static Website",
+                    "kind": "architecture",
+                    "parent": "static-website",
+                    "slug": "azure",
+                    "clouds": [
+                        "azure"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Static Website",
+                    "kind": "architecture",
+                    "parent": "static-website",
+                    "slug": "gcp",
+                    "clouds": [
+                        "gcp"
+                    ],
+                    "templates": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Networking and Security",
+            "slug": "networking-security",
+            "groups": [
+                {
+                    "name": "VPC Architecture",
+                    "kind": "architecture",
+                    "parent": "networking-security",
+                    "slug": "aws",
+                    "clouds": [
+                        "aws"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "VPC Architecture",
+                    "kind": "architecture",
+                    "parent": "networking-security",
+                    "slug": "azure",
+                    "clouds": [
+                        "azure"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "VPC Architecture",
+                    "kind": "architecture",
+                    "parent": "networking-security",
+                    "slug": "gcp",
+                    "clouds": [
+                        "gcp"
+                    ],
+                    "templates": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Serverless",
+            "slug": "serverless-application",
+            "groups": [
+                {
+                    "name": "Serverless Application",
+                    "kind": "architecture",
+                    "parent": "serverless-application",
+                    "slug": "aws",
+                    "clouds": [
+                        "aws"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Serverless Application",
+                    "kind": "architecture",
+                    "parent": "serverless-application",
+                    "slug": "azure",
+                    "clouds": [
+                        "azure"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Serverless Application",
+                    "kind": "architecture",
+                    "parent": "serverless-application",
+                    "slug": "gcp",
+                    "clouds": [
+                        "gcp"
+                    ],
+                    "templates": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Container Service",
+            "slug": "container-service",
+            "groups": [
+                {
+                    "name": "Container Service",
+                    "kind": "architecture",
+                    "parent": "container-service",
+                    "slug": "aws",
+                    "clouds": [
+                        "aws"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Container Service",
+                    "kind": "architecture",
+                    "parent": "container-service",
+                    "slug": "azure",
+                    "clouds": [
+                        "azure"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Container Service",
+                    "kind": "architecture",
+                    "parent": "container-service",
+                    "slug": "gcp",
+                    "clouds": [
+                        "gcp"
+                    ],
+                    "templates": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Virtual Machine",
+            "slug": "virtual-machine",
+            "groups": [
+                {
+                    "name": "Virtual Machine",
+                    "kind": "architecture",
+                    "parent": "virtual-machine",
+                    "slug": "aws",
+                    "clouds": [
+                        "aws"
+                    ],
+                    "templates": [
+                        "aws-vpc-base-cs"
+                    ]
+                },
+                {
+                    "name": "Virtual Machine",
+                    "kind": "architecture",
+                    "parent": "virtual-machine",
+                    "slug": "azure",
+                    "clouds": [
+                        "azure"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Virtual Machine",
+                    "kind": "architecture",
+                    "parent": "virtual-machine",
+                    "slug": "gcp",
+                    "clouds": [
+                        "gcp"
+                    ],
+                    "templates": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Kubernetes Cluster",
+            "slug": "kubernetes",
+            "groups": [
+                {
+                    "name": "Kubernetes Cluster",
+                    "kind": "architecture",
+                    "parent": "kubernetes",
+                    "slug": "aws",
+                    "clouds": [
+                        "aws"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Kubernetes Cluster",
+                    "kind": "architecture",
+                    "parent": "kubernetes",
+                    "slug": "azure",
+                    "clouds": [
+                        "azure"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Kubernetes Cluster",
+                    "kind": "architecture",
+                    "parent": "kubernetes",
+                    "slug": "gcp",
+                    "clouds": [
+                        "gcp"
+                    ],
+                    "templates": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Kubernetes Application",
+            "slug": "kubernetes-application",
+            "groups": [
+                {
+                    "name": "Helm Chart",
+                    "kind": "architecture",
+                    "parent": "kubernetes-application",
+                    "slug": "helm-chart",
+                    "clouds": [
+                        "kubernetes"
+                    ],
+                    "templates": [
+                    ]
+                },
+                {
+                    "name": "Web Application",
+                    "kind": "architecture",
+                    "parent": "kubernetes-application",
+                    "slug": "web-application",
+                    "clouds": [
+                        "kubernetes"
+                    ],
+                    "templates": [
+                    ]
+                }
+            ]
+        }
+    ],
+    "templates": {
+    }
+}
