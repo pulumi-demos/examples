@@ -265,5 +265,14 @@
         }
     ],
     "templates": {
+        "aws-vpc-base-cs": {
+            "name": "aws-vpc-base-cs",
+            "runtime": "csharp",
+            "template": {
+                "description": "A basic AWS VPC (Csharp)",
+                "config": {
+                }
+            }
+        }
     }
 }
