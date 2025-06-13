@@ -1,0 +1,8 @@
+{
+  "name": "blue-green-rds-deployment",
+  "main": "index.ts",
+  "dependencies": {
+    "@pulumi/aws": "^6.82.1",
+    "@pulumi/pulumi": "^3.113.0"
+  }
+}
