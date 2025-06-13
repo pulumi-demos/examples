@@ -1,8 +1,8 @@
 # Blue/Green Deployment Updates for Postgres on RDS
 
-A Postgres RDS deployment that uses blue/green updates for minimal downtime. Please refer to the AWS Documentation on blue/green deployments for more details on the update strategy: [Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html). Also refer to [Low-Downtime Updates (Pulumi)](https://www.pulumi.com/registry/packages/aws/api-docs/rds/instance/#low-downtime-updates) for information on the implementation or [LINK TO WALKTHROUGH](https://google.com) for a detailed walkthrough for completing different types of updates.
+A Postgres RDS deployment that uses blue/green updates for minimal downtime. Please refer to the AWS Documentation on blue/green deployments for more details on the update strategy: [Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html). Also refer to [Low-Downtime Updates (Pulumi)](https://www.pulumi.com/registry/packages/aws/api-docs/rds/instance/#low-downtime-updates) for information on the implementation.
 
-When blueGreenUpdate is enabled and the database is updated, the program starts by creating a blue/green deployment to maintain availability. Then, it performs the requested update on the green instance, performs a guardrail check, promotes the green instance, and finally deletes the old instance and removes the blue/green deployment. This leaves just the updated database running with minimal downtime during the update.
+When `blueGreenUpdate` is enabled and the database is updated, the program starts by creating a blue/green deployment to maintain availability. Then, it performs the requested update on the green instance, performs a guardrail check, promotes the green instance, and finally deletes the old instance and removes the blue/green deployment. This leaves just the updated database running with minimal downtime during the update.
 
 > :warning:
 > This will not deploy and maintain a blue/green deployment. The blue/green deployment is temporarily created for the update and automatically removed afterwards. The green deployment is automatically promoted, so you will not have the chance to do custom testing before promoting it.
@@ -17,10 +17,9 @@ To complete the initial deployment, you will need to configure your environment 
 ```bash
 npm install
 pulumi stack init stack_name // replace "stack_name" with the stack name of your choice
-cp Pulumi.EXAMPLE.yaml Pulumi.stack_name.yaml // replace "stack_name" with the stack name of your choice
 ```
 
-Review the configuration that is now in Pulumi.stack_name.yaml (where stack_name is your stack's name) to ensure it matches the desired initial configuration. You will have to run `pulumi config set DB_PASSWORD --secret <password>` to securely set your database password.
+Review the configuration that is now in Pulumi.yaml (where stack_name is your stack's name) to ensure it matches the desired initial configuration. You will have to run `pulumi config set DB_PASSWORD --secret <password>` to securely set your database password. Use `pulumi config set PARAMETER_NAME DESIRED_VALUE` to overwrite any of the other configuration settings for your stack.
 
 After everything is configured correctly, run `pulumi up` to deploy your database.
 

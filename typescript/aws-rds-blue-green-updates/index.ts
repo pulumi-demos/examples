@@ -42,3 +42,4 @@ const database = new aws.rds.Instance(
 );
 
 export const database_arn = database.arn;
+export const full_database_config = database;
