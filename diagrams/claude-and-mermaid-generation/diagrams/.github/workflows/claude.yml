@@ -1,0 +1,56 @@
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@beta
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+          # This is an optional setting that allows Claude to read CI results on PRs
+          additional_permissions: |
+            actions: read
+
+          # Optional: Allow Claude to run specific commands
+          allowed_tools: "Bash(npm install),Bash(pulumi preview --json),Bash(npx mmdc -i diagrams/aws-infrastructure.mmd -o diagrams/aws-infrastructure.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-component.mmd -o diagrams/c4-component.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-container.mmd -o diagrams/c4-container.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-context.mmd -o diagrams/c4-context.svg --puppeteerConfigFile puppeteer-config.json)"
+
+          # Optional: Add custom instructions for Claude to customize its behavior for your project
+          custom_instructions: |
+            You should create or update the .mmd diagrams in the `/diagrams` folder to reflect the state of the architecture.
+            Run npm install to download all the packages in use. Try to use commands you have permissions for first. 
+            Use npx mmdc -i diagrams/<DIAGRAM_NAME>.mmd -o diagrams/<DIAGRAM_NAME>.svg --puppeteerConfigFile puppeteer-config.json for mermaid commands.
+            Use `pulumi preview --json` to get details about what's already been deployed in the stack and what will be updated.
+            Use that information to draw the C4 diagrams using mermaid. There should be a context diagram, a container diagram, a component diagram, and an infrastructure diagram.
+            Double check that your output has no errors and do a beautifying pass. If the .svg diagrams can't be generated, fix the .mmd file so they can be.
