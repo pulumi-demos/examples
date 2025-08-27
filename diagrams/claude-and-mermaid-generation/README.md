@@ -55,6 +55,27 @@ Ensure your repository has these workflow permissions:
 
 Comment `@claude` on any PR or issue to manually trigger diagram updates.
 
+## How Claude Behaves
+
+When triggered, Claude will:
+
+1. **Analyze the codebase** to understand the current infrastructure setup
+2. **Select the production stack** using `pulumi stack select prod`
+3. **Run `pulumi preview --json`** to get detailed infrastructure resource information
+4. **Review existing diagrams** in the `/diagrams` folder to understand current state
+5. **Generate or update Mermaid diagrams** based on infrastructure changes:
+   - Creates C4 context, container, and component diagrams
+   - Generates AWS infrastructure diagrams showing resources and relationships
+   - Maintains consistent styling and follows Mermaid best practices
+6. **Convert diagrams to SVG** using `npx mmdc` for visual rendering
+7. **Commit changes** directly to the PR branch with descriptive commit messages
+
+Claude focuses on:
+- **Accuracy**: Diagrams reflect actual infrastructure as defined in code
+- **Completeness**: All significant resources and relationships are included
+- **Clarity**: Diagrams are well-organized and easy to understand
+- **Consistency**: Maintains diagram standards and styling across updates
+
 ## Supported Diagrams
 
 The system generates these Mermaid diagrams in the `/diagrams` folder:
@@ -71,6 +92,8 @@ Each `.mmd` file is automatically converted to `.svg` format.
 Claude has permission to run these commands:
 
 - `npm install` - Install dependencies
+- `pulumi stack ls` - List available Pulumi stacks
+- `pulumi stack select prod` - Select the production stack
 - `pulumi preview --json` - Get infrastructure details
 - `npx mmdc` - Generate SVG diagrams from Mermaid files
 

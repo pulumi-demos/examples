@@ -44,13 +44,39 @@ jobs:
             actions: read
 
           # Optional: Allow Claude to run specific commands
-          allowed_tools: "Bash(npm install),Bash(pulumi preview --json),Bash(npx mmdc -i diagrams/aws-infrastructure.mmd -o diagrams/aws-infrastructure.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-component.mmd -o diagrams/c4-component.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-container.mmd -o diagrams/c4-container.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-context.mmd -o diagrams/c4-context.svg --puppeteerConfigFile puppeteer-config.json)"
+          allowed_tools: "Bash(npm install),Bash(pulumi stack ls),Bash(pulumi stack select prod),Bash(pulumi preview --json),Bash(pulumi preview --diff),Bash(pulumi stack output --json),Bash(npx mmdc -i diagrams/aws-infrastructure.mmd -o diagrams/aws-infrastructure.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-component.mmd -o diagrams/c4-component.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-container.mmd -o diagrams/c4-container.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-context.mmd -o diagrams/c4-context.svg --puppeteerConfigFile puppeteer-config.json)"
 
           # Optional: Add custom instructions for Claude to customize its behavior for your project
           custom_instructions: |
-            You should create or update the .mmd diagrams in the `/diagrams` folder to reflect the state of the architecture.
-            Run npm install to download all the packages in use. Try to use commands you have permissions for first. 
-            Use npx mmdc -i diagrams/<DIAGRAM_NAME>.mmd -o diagrams/<DIAGRAM_NAME>.svg --puppeteerConfigFile puppeteer-config.json for mermaid commands.
-            Use `pulumi preview --json` to get details about what's already been deployed in the stack and what will be updated.
-            Use that information to draw the C4 diagrams using mermaid. There should be a context diagram, a container diagram, a component diagram, and an infrastructure diagram.
-            Double check that your output has no errors and do a beautifying pass. If the .svg diagrams can't be generated, fix the .mmd file so they can be.
+            ## Pulumi Infrastructure Diagramming Assistant
+            
+            ### Step 1: Analyze Infrastructure State
+            - Run `npm install` first to ensure dependencies are available
+            - Check available stacks with `pulumi stack ls`
+            - Select the production stack using `pulumi stack select prod`
+            - Execute `pulumi preview --json` to get the detailed resource plan in JSON format
+            - Use `pulumi preview --diff` for human-readable change summaries
+            - Run `pulumi stack output --json` to get current stack outputs if available
+            - Parse the JSON output to understand resource relationships, dependencies, and changes
+            
+            ### Step 2: Generate/Update Diagrams
+            Update the 4 Mermaid diagram files in `/diagrams/` to accurately reflect the infrastructure:
+            - **aws-infrastructure.mmd**: Technical AWS resource diagram showing VPC, subnets, EC2, security groups, etc.
+            - **c4-context.mmd**: System context showing external users/systems interacting with the infrastructure
+            - **c4-container.mmd**: Container-level view showing major components and their interactions
+            - **c4-component.mmd**: Component-level view showing detailed internal architecture
+            
+            ### Step 3: Generate SVG Files
+            Convert all .mmd files to .svg using:
+            `npx mmdc -i diagrams/<DIAGRAM_NAME>.mmd -o diagrams/<DIAGRAM_NAME>.svg --puppeteerConfigFile puppeteer-config.json`
+            
+            ### Step 4: Validate Changes
+            - Verify all diagram files were updated successfully
+            - Check that diagrams accurately reflect the Pulumi infrastructure state
+            - Confirm all SVG files were generated without errors
+            
+            ### Quality Checks:
+            - Ensure all .mmd files have valid Mermaid syntax
+            - Verify all .svg files generate successfully
+            - Diagrams should accurately reflect the Pulumi preview output
+            - Include both existing resources and planned changes in the diagrams
