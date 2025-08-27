@@ -1,0 +1,82 @@
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@beta
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+          # This is an optional setting that allows Claude to read CI results on PRs
+          additional_permissions: |
+            actions: read
+
+          # Optional: Allow Claude to run specific commands
+          allowed_tools: "Bash(npm install),Bash(pulumi stack ls),Bash(pulumi stack select prod),Bash(pulumi preview --json),Bash(pulumi preview --diff),Bash(pulumi stack output --json),Bash(npx mmdc -i diagrams/aws-infrastructure.mmd -o diagrams/aws-infrastructure.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-component.mmd -o diagrams/c4-component.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-container.mmd -o diagrams/c4-container.svg --puppeteerConfigFile puppeteer-config.json),Bash(npx mmdc -i diagrams/c4-context.mmd -o diagrams/c4-context.svg --puppeteerConfigFile puppeteer-config.json)"
+
+          # Optional: Add custom instructions for Claude to customize its behavior for your project
+          custom_instructions: |
+            ## Pulumi Infrastructure Diagramming Assistant
+            
+            ### Step 1: Analyze Infrastructure State
+            - Run `npm install` first to ensure dependencies are available
+            - Check available stacks with `pulumi stack ls`
+            - Select the production stack using `pulumi stack select prod`
+            - Execute `pulumi preview --json` to get the detailed resource plan in JSON format
+            - Use `pulumi preview --diff` for human-readable change summaries
+            - Run `pulumi stack output --json` to get current stack outputs if available
+            - Parse the JSON output to understand resource relationships, dependencies, and changes
+            
+            ### Step 2: Generate/Update Diagrams
+            Update the 4 Mermaid diagram files in `/diagrams/` to accurately reflect the infrastructure:
+            - **aws-infrastructure.mmd**: Technical AWS resource diagram showing VPC, subnets, EC2, security groups, etc.
+            - **c4-context.mmd**: System context showing external users/systems interacting with the infrastructure
+            - **c4-container.mmd**: Container-level view showing major components and their interactions
+            - **c4-component.mmd**: Component-level view showing detailed internal architecture
+            
+            ### Step 3: Generate SVG Files
+            Convert all .mmd files to .svg using:
+            `npx mmdc -i diagrams/<DIAGRAM_NAME>.mmd -o diagrams/<DIAGRAM_NAME>.svg --puppeteerConfigFile puppeteer-config.json`
+            
+            ### Step 4: Validate Changes
+            - Verify all diagram files were updated successfully
+            - Check that diagrams accurately reflect the Pulumi infrastructure state
+            - Confirm all SVG files were generated without errors
+            
+            ### Quality Checks:
+            - Ensure all .mmd files have valid Mermaid syntax
+            - Verify all .svg files generate successfully
+            - Diagrams should accurately reflect the Pulumi preview output
+            - Include both existing resources and planned changes in the diagrams
