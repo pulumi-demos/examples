@@ -1,0 +1,21 @@
+{
+  "name": "esc-and-rds-module",
+  "main": "index.ts",
+  "scripts": {
+    "generate-component": "mmdc --input \"./diagram/relationships.mmd\" --output \"relationships.svg\"",
+    "generate-arch": "mmdc --input \"./diagram/achitecture.mmd\" --output \"architecture.svg\""
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.6.1",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^18",
+    "markdownlint-cli": "^0.38.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@pulumi/aws": "^7.2.0",
+    "@pulumi/pulumi": "^3.187.0",
+    "@pulumi/pulumiservice": "^0.31.0",
+    "@pulumi/random": "^4.18.3"
+  }
+}
