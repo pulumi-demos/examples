@@ -1,6 +1,6 @@
 # SecretManagedRDS Pulumi Module
 
-A Pulumi component module that creates an AWS RDS Aurora cluster with automatic secret rotation capabilities using Pulumi ESC (Environment, Secrets, and Configuration).
+A Pulumi component module that creates an AWS RDS Aurora cluster with automatic secret rotation capabilities using [Pulumi ESC](https://www.pulumi.com/docs/esc/reference/rotators/) (Environment, Secrets, and Configuration).
 
 ## Features
 
@@ -13,6 +13,7 @@ A Pulumi component module that creates an AWS RDS Aurora cluster with automatic 
 ## Architecture
 
 The module creates several components:
+
 - **RDS Aurora Cluster** with configurable instances
 - **AWS Secrets Manager** integration for master user credentials
 - **Pulumi ESC Environments** for managing rotating database users
@@ -45,7 +46,7 @@ new SecretManagedRDS(
         instanceClass: aws.rds.InstanceType.R6G_Large,
       },
       {
-        engine: "aurora-postgresql", 
+        engine: "aurora-postgresql",
         instanceClass: aws.rds.InstanceType.R6G_Large,
       },
     ],
@@ -58,7 +59,7 @@ new SecretManagedRDS(
     environmentName: "production",
     rotateUsers: {
       primaryUsername: "app_user_1",
-      backupUsername: "app_user_2", 
+      backupUsername: "app_user_2",
       rotationSchedule: "0 0 * * *", // Rotate app users daily at midnight
     },
   },
@@ -89,7 +90,7 @@ new SecretManagedRDS(
       rotationSchedule: "cron(0 3 ? * SUN *)", // Weekly on Sunday at 3 AM
     },
     publiclyAccessible: true, // No Lambda rotator - ESC handles rotation directly
-    environmentName: "staging", 
+    environmentName: "staging",
     rotateUsers: {
       primaryUsername: "webapp",
       backupUsername: "webapp_backup",
@@ -140,7 +141,7 @@ const dbPassword = config.getSecret("db-password") || "fallback-password";
 
 // Creates: Basic RDS cluster only (no rotation, no ESC environments)
 new SecretManagedRDS(
-  "manual-db", 
+  "manual-db",
   {
     clusterArgs: {
       engine: aws.rds.EngineType.AuroraPostgresql,
@@ -227,13 +228,13 @@ new SecretManagedRDS(
         promotionTier: 0, // Primary instance
       },
       {
-        engine: "aurora-postgresql", 
+        engine: "aurora-postgresql",
         instanceClass: aws.rds.InstanceType.R6G_Large,
         promotionTier: 1, // Replica 1
       },
       {
         engine: "aurora-postgresql",
-        instanceClass: aws.rds.InstanceType.R6G_Large, 
+        instanceClass: aws.rds.InstanceType.R6G_Large,
         promotionTier: 1, // Replica 2
       },
     ],
@@ -256,7 +257,7 @@ new SecretManagedRDS(
 
 #### MySQL Development Database
 
-```typescript  
+```typescript
 // Creates: MySQL Aurora cluster with ESC user rotation
 new SecretManagedRDS(
   "mysql-dev-db",
@@ -282,7 +283,7 @@ new SecretManagedRDS(
     environmentName: "mysql-development",
     rotateUsers: {
       primaryUsername: "devapp",
-      backupUsername: "devapp_alt", 
+      backupUsername: "devapp_alt",
       rotationSchedule: "0 3 ? * SAT *", // Before master rotation
     },
   },
@@ -307,12 +308,14 @@ const dbSubnetGroup = new aws.rds.SubnetGroup("db-subnet-group", {
 
 const dbSecurityGroup = new aws.ec2.SecurityGroup("db-sg", {
   vpcId: customVpc.id,
-  ingress: [{
-    protocol: "tcp",
-    fromPort: 5432,
-    toPort: 5432,
-    cidrBlocks: ["10.0.0.0/16"],
-  }],
+  ingress: [
+    {
+      protocol: "tcp",
+      fromPort: 5432,
+      toPort: 5432,
+      cidrBlocks: ["10.0.0.0/16"],
+    },
+  ],
 });
 
 new SecretManagedRDS(
@@ -355,15 +358,15 @@ new SecretManagedRDS(
 
 #### `SecretManagedRDSArgs`
 
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `clusterArgs` | `aws.rds.ClusterArgs` | ✅ | RDS cluster configuration (excluding managed fields) |
-| `instances` | `aws.rds.ClusterInstanceArgs[]` | ✅ | Array of cluster instances to create |
-| `basename` | `string` | ✅ | Base name for resources and database name |
-| `environmentName` | `string` | ✅ | Pulumi ESC environment name for rotation |
-| `publiclyAccessible` | `boolean` | ✅ | Whether the database is publicly accessible |
-| `masterCredentialsConfiguration` | `object` | ✅ | Master user configuration |
-| `rotateUsers` | `object` | ❌ | Additional user rotation configuration |
+| Property                         | Type                            | Required | Description                                          |
+| -------------------------------- | ------------------------------- | -------- | ---------------------------------------------------- |
+| `clusterArgs`                    | `aws.rds.ClusterArgs`           | ✅       | RDS cluster configuration (excluding managed fields) |
+| `instances`                      | `aws.rds.ClusterInstanceArgs[]` | ✅       | Array of cluster instances to create                 |
+| `basename`                       | `string`                        | ✅       | Base name for resources and database name            |
+| `environmentName`                | `string`                        | ✅       | Pulumi ESC environment name for rotation             |
+| `publiclyAccessible`             | `boolean`                       | ✅       | Whether the database is publicly accessible          |
+| `masterCredentialsConfiguration` | `object`                        | ✅       | Master user configuration                            |
+| `rotateUsers`                    | `object`                        | ❌       | Additional user rotation configuration               |
 
 #### Master Credentials Configuration
 
@@ -388,13 +391,17 @@ rotateUsers?: {
 ## How It Works
 
 ### Master User Rotation
+
 When `masterCredentialsConfiguration.rotationSchedule` is provided:
+
 1. RDS cluster is configured with AWS-managed master user password
 2. AWS Secrets Manager handles automatic rotation using the provided schedule
 3. Credentials are stored in AWS Secrets Manager
 
-### Application User Rotation  
+### Application User Rotation
+
 When `rotateUsers` is configured:
+
 1. **Private databases**: A Lambda function is deployed in your VPC to handle rotation
 2. **Public databases**: Pulumi ESC handles rotation directly
 3. Two Pulumi ESC environments are created:
@@ -403,6 +410,7 @@ When `rotateUsers` is configured:
 4. Application users are rotated according to the schedule using the two-user pattern
 
 ### Security Model
+
 - Master credentials stored in AWS Secrets Manager
 - Application user credentials managed through Pulumi ESC
 - Lambda rotator uses OIDC authentication with minimal IAM permissions
@@ -418,8 +426,9 @@ When `rotateUsers` is configured:
 ## Dependencies
 
 This module uses:
+
 - `@pulumi/aws` - AWS resources
-- `@pulumi/pulumi` - Core Pulumi functionality  
+- `@pulumi/pulumi` - Core Pulumi functionality
 - `@pulumi/pulumiservice` - Pulumi ESC environments
 - `@pulumi/random` - Password generation
 - `js-yaml` - YAML configuration generation
