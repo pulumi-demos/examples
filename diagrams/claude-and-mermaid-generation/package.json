@@ -1,0 +1,12 @@
+{
+  "name": "diagramming-patterns",
+  "description": "A small web app with networking components",
+  "main": "index.ts",
+  "scripts": {},
+  "author": "",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.9.0",
+    "@pulumi/aws": "^7.5.0",
+    "@pulumi/pulumi": "^3.190.0"
+  }
+}
