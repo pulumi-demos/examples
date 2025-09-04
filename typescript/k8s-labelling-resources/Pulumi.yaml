@@ -1,0 +1,10 @@
+name: default-labels-k8s
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+description: EKS resources with labels
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/851d43d4-56a2-41b0-860a-d90051f27b09.zip
