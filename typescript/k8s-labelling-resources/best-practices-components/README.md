@@ -52,6 +52,6 @@ const namespace = new Namespace("my-namespace", {
 ## Run This Example
 
 ```bash
-npm install
+pulumi install
 pulumi up
 ```

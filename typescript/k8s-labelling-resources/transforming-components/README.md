@@ -89,6 +89,6 @@ const eksResources = new EKSResources(
 ## Run This Example
 
 ```bash
-npm install
+pulumi install
 pulumi up
 ```

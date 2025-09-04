@@ -79,7 +79,7 @@ The baseline implementation that creates all resources manually with hardcoded l
 2. Install dependencies:
 
    ```bash
-   npm install
+   pulumi install
    ```
 
 3. Deploy the infrastructure:
