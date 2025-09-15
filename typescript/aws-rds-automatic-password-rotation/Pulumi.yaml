@@ -1,0 +1,8 @@
+name: esc-and-rds-module
+description: An RDS Database with ESC in use for secrets and automatic rotation enabled
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+config:
+  aws:region: us-east-1

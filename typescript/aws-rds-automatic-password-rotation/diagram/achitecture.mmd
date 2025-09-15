@@ -1,0 +1,105 @@
+graph TB
+    subgraph AWS_ACCOUNT ["AWS Account"]
+        
+        subgraph VPC ["VPC"]
+            subgraph PRIVATE_SUBNET ["Private Subnets"]
+                subgraph RDS_SUBNET ["RDS Subnet Group"]
+                    RDS_CLUSTER[Aurora PostgreSQL Cluster<br/>examplerot<br/>Port 5432]
+                    RDS_INSTANCE[RDS Instance<br/>r6g.large]
+                end
+                
+                subgraph LAMBDA_SUBNET ["Lambda Subnet"]
+                    LAMBDA_FUNC[Lambda Function<br/>Rotator Connector<br/>Runtime: provided.al2023]
+                end
+            end
+            
+            subgraph SECURITY_GROUPS ["Security Groups"]
+                RDS_SG[RDS Security Group<br/>Inbound: 5432 from Lambda SG]
+                LAMBDA_SG[Lambda Security Group<br/>Outbound: 5432 to RDS SG]
+            end
+        end
+        
+        subgraph SECRETS_MANAGER ["AWS Secrets Manager"]
+            MASTER_SECRET[Master User Secret<br/>Auto-generated<br/>Rotation: Daily]
+        end
+        
+        subgraph S3_BUCKET ["S3 Bucket"]
+            LAMBDA_CODE[Lambda Code Archive<br/>public-esc-rotator-lambdas-production]
+        end
+        
+        subgraph IAM_ROLES ["IAM Roles & Policies"]
+            LAMBDA_EXEC_ROLE[Lambda Execution Role<br/>VPC Access Permissions]
+            ASSUMED_ROLE[Assumed Role for Pulumi ESC<br/>OIDC Web Identity]
+            OIDC_PROVIDER[OpenID Connect Provider<br/>api.pulumi.com]
+        end
+        
+        subgraph LAMBDA_CONFIG ["Lambda Configuration"]
+            CODE_SIGNING[Code Signing Config<br/>Signature Verification]
+        end
+    end
+    
+    subgraph PULUMI_ESC ["Pulumi ESC (External)"]
+        CREDS_ENV[Environment: example<br/>Contains DB credentials]
+        MANAGING_ENV[Environment: exampleManagingCreds<br/>Manages credential rotation]
+    end
+    
+    subgraph ROTATION_USERS ["Database Users"]
+        PRIMARY_USER[app_user_1<br/>Primary rotating user]
+        BACKUP_USER[app_user_2<br/>Backup rotating user]
+        MASTER_USER[admin<br/>Master user]
+    end
+    
+    %% Infrastructure relationships
+    RDS_CLUSTER --> RDS_INSTANCE
+    RDS_CLUSTER --> MASTER_SECRET
+    RDS_CLUSTER --> RDS_SG
+    LAMBDA_FUNC --> LAMBDA_SG
+    LAMBDA_FUNC --> LAMBDA_EXEC_ROLE
+    LAMBDA_FUNC --> LAMBDA_CODE
+    LAMBDA_FUNC --> CODE_SIGNING
+    
+    %% Security group rules
+    LAMBDA_SG -.-> RDS_SG
+    
+    %% Secret rotation
+    MASTER_SECRET -.-> RDS_CLUSTER
+    
+    %% OIDC and assumed role
+    ASSUMED_ROLE --> OIDC_PROVIDER
+    PULUMI_ESC --> OIDC_PROVIDER
+    PULUMI_ESC --> ASSUMED_ROLE
+    
+    %% Environment connections
+    CREDS_ENV --> MASTER_SECRET
+    MANAGING_ENV --> CREDS_ENV
+    PULUMI_ESC --> LAMBDA_FUNC
+    
+    %% Database users
+    MASTER_USER -.-> RDS_CLUSTER
+    PRIMARY_USER -.-> RDS_CLUSTER
+    BACKUP_USER -.-> RDS_CLUSTER
+    
+    %% Data flow for rotation
+    PULUMI_ESC -.-> LAMBDA_FUNC
+    LAMBDA_FUNC -.-> RDS_CLUSTER
+    
+    %% Network flow
+    LAMBDA_FUNC -.-> RDS_CLUSTER
+    
+    %% Styling
+    classDef aws fill:#ff9900,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    classDef rds fill:#3f48cc,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    classDef lambda fill:#ff7300,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    classDef secrets fill:#7c3aed,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    classDef iam fill:#dd344c,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    classDef pulumi fill:#8a63d2,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    classDef users fill:#059669,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    classDef network fill:#0891b2,stroke:#232f3e,stroke-width:2px,color:#ffffff
+    
+    class RDS_CLUSTER,RDS_INSTANCE rds
+    class LAMBDA_FUNC,LAMBDA_CODE,CODE_SIGNING lambda
+    class MASTER_SECRET secrets
+    class LAMBDA_EXEC_ROLE,ASSUMED_ROLE,OIDC_PROVIDER iam
+    class CREDS_ENV,MANAGING_ENV,PULUMI_ESC pulumi
+    class PRIMARY_USER,BACKUP_USER,MASTER_USER users
+    class RDS_SG,LAMBDA_SG network

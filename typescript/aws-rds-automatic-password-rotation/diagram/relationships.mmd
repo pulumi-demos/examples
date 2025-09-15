@@ -1,0 +1,83 @@
+graph TB
+    subgraph SMR_COMP ["SecretManagedRDS Component"]
+        SMR[SecretManagedRDS<br/>exampleManagedDB]
+        
+        subgraph RDS_RES ["RDS Resources"]
+            RDS[RDS Cluster<br/>examplerot<br/>Aurora PostgreSQL]
+            INST[RDS Instance<br/>R6G Large]
+            SECRET[AWS Secret<br/>Master Credentials]
+            ROTATION[Secret Rotation<br/>Daily Schedule]
+        end
+        
+        subgraph LAMBDA_RES ["Lambda Rotator - Private DB"]
+            ROTATOR[RotatorLambda<br/>examplerot-rotator]
+            LAMBDA[Lambda Function<br/>Connector]
+            EXEC_ROLE[Execution Role]
+            ASSUMED_ROLE[Assumed Role<br/>OIDC]
+            SG[Security Group]
+            CODE_SIGN[Code Signing Config]
+        end
+        
+        subgraph ESC_ENV ["Pulumi ESC Environments"]
+            ENV_COMP[EnvironmentsForRotation<br/>examplerot-environments]
+            CREDS_ENV[Credentials Environment<br/>example]
+            MANAGING_ENV[Managing Environment<br/>exampleManagingCreds]
+        end
+        
+        subgraph CONFIG_BOX ["Configuration"]
+            CONFIG[Configuration<br/>masterUsername: admin<br/>rotateUsers: app_user_1 app_user_2<br/>environmentName: example<br/>publiclyAccessible: false]
+        end
+    end
+    
+    %% Main component relationships
+    SMR --> RDS
+    SMR --> ROTATOR
+    SMR --> ENV_COMP
+    
+    %% RDS relationships
+    RDS --> INST
+    RDS --> SECRET
+    SECRET --> ROTATION
+    
+    %% Lambda rotator relationships
+    ROTATOR --> LAMBDA
+    ROTATOR --> EXEC_ROLE
+    ROTATOR --> ASSUMED_ROLE
+    ROTATOR --> SG
+    ROTATOR --> CODE_SIGN
+    
+    %% Security group connection to RDS
+    SG -.-> RDS
+    
+    %% Environment relationships
+    ENV_COMP --> CREDS_ENV
+    ENV_COMP --> MANAGING_ENV
+    
+    %% Data flow connections
+    SECRET -.-> ROTATOR
+    SECRET -.-> ENV_COMP
+    RDS -.-> ROTATOR
+    RDS -.-> ENV_COMP
+    ASSUMED_ROLE -.-> ENV_COMP
+    LAMBDA -.-> ENV_COMP
+    
+    %% Configuration flow
+    CONFIG -.-> SMR
+    
+    %% External connections
+    PULUMI_ESC[Pulumi ESC Service] -.-> CREDS_ENV
+    PULUMI_ESC -.-> MANAGING_ENV
+    ASSUMED_ROLE -.-> PULUMI_ESC
+    
+    %% Styling
+    classDef component fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef resource fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef environment fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef config fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef external fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    
+    class SMR,ROTATOR,ENV_COMP component
+    class RDS,INST,SECRET,ROTATION,LAMBDA,EXEC_ROLE,ASSUMED_ROLE,SG,CODE_SIGN resource
+    class CREDS_ENV,MANAGING_ENV environment
+    class CONFIG config
+    class PULUMI_ESC external
