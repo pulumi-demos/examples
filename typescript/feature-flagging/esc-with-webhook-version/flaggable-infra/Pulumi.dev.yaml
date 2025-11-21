@@ -1,0 +1,4 @@
+environment:
+  - featureflagging/config
+config:
+  repoUrl: "YOUR_REPO_URL"

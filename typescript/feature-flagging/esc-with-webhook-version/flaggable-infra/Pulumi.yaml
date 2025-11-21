@@ -1,0 +1,5 @@
+name: flag-infra-esc
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm

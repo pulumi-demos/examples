@@ -1,0 +1,5 @@
+name: esc-infra
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm

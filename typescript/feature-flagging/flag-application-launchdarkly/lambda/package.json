@@ -1,0 +1,9 @@
+{
+  "name": "flag-checker-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function to check LaunchDarkly flags",
+  "main": "lambda.js",
+  "dependencies": {
+    "@launchdarkly/node-server-sdk": "^9.0.0"
+  }
+}

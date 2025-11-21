@@ -1,0 +1,9 @@
+name: launchdarkly-application
+runtime: nodejs # or python, go, dotnet
+packages:
+  launchdarkly:
+    source: terraform-provider
+    version: 1.0.2
+    parameters:
+      - launchdarkly/launchdarkly
+      - 2.26.0

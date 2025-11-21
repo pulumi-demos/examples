@@ -1,0 +1,3 @@
+config:
+  launchdarkly-application:ldAccessToken: "USE pulumi config set ldAccessToken <VALUE> --secret"
+  launchdarkly-application:ldSdkKey: "USE pulumi config set ldSdkKey <VALUE> --secret"

@@ -1,0 +1,19 @@
+{
+  "name": "esc-infra",
+  "description": "Use the pulumi provider to create an environment",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.935.0",
+    "@pulumi/aws": "^7.11.1",
+    "@pulumi/pulumi": "^3.207.0",
+    "@pulumi/pulumiservice": "^0.32.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.159",
+    "@types/node": "^24.10.1"
+  }
+}

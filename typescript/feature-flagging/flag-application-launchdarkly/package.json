@@ -1,0 +1,14 @@
+{
+  "name": "flag-infra-esc",
+  "description": "Lambda function with optional logging",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "@pulumi/aws": "^7.0.0",
+    "@pulumi/launchdarkly": "file:sdks/launchdarkly",
+    "@pulumi/pulumi": "^3.208.0"
+  }
+}

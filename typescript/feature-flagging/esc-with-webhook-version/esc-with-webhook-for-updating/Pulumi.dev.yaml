@@ -1,0 +1,2 @@
+config:
+  esc-infra:pulumiAccessToken: "USE pulumi config set pulumiAccessToken <VALUE> --secret"
