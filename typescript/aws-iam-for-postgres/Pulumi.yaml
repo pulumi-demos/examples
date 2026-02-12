@@ -1,0 +1,6 @@
+name: iam-for-postgres
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+description: An AWS EKS cluster with permissions to an RDS database
