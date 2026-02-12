@@ -1,0 +1,16 @@
+{
+  "name": "iam-for-postgres",
+  "description": "An AWS EKS cluster with permissions to an RDS database",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "@pulumi/aws": "^7.15.0",
+    "@pulumi/kubernetes": "^4.24.1",
+    "@pulumi/postgresql": "^3.16.1",
+    "@pulumi/pulumi": "^3.213.0",
+    "@pulumi/tls": "^5.2.3"
+  }
+}
