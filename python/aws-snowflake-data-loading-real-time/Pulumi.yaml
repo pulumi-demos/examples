@@ -1,0 +1,20 @@
+name: aws-snowflake-data-loading-real-time
+runtime:
+  name: python
+  options:
+    toolchain: uv
+description: Production-grade data loading into Snowflake with three patterns - direct Firehose streaming (seconds), S3 auto-ingest via Snowpipe, and batch stage loading.
+template:
+  description: Load data into Snowflake in seconds using Pulumi ComponentResources
+  config:
+    aws:region:
+      description: AWS region to deploy resources
+      default: us-west-2
+    aws-snowflake-data-loading-real-time:database:
+      description: Snowflake database name for landing tables
+      default: LANDING_ZONE_WEBHOOKS
+    aws-snowflake-data-loading-real-time:environment:
+      description: Environment name (used in IAM role naming)
+      default: dev
+    aws-snowflake-data-loading-real-time:webhook-repo:
+      description: GitHub repository name to create webhooks on (e.g. my-test-repo)
